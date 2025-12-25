@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>y11han&apos;s icu</title><description>One gay man&apos;s website</description><link>https://blog.y11han.icu/</link><language>zh_CN</language><item><title>我对安卓设备启动信任链的理解</title><link>https://blog.y11han.icu/posts/android-device-boot-trust-chain/</link><guid isPermaLink="true">https://blog.y11han.icu/posts/android-device-boot-trust-chain/</guid><description>只作为个人学习笔记使用</description><pubDate>Thu, 25 Dec 2025 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;[!TIP]&lt;/p&gt;
-&lt;p&gt;阅读此篇文章时，建议开启“网络视图”（位于顶栏右上角）以获得较好的阅读体验。&lt;/p&gt;
+&lt;p&gt;如果您使用电脑阅读此文章，建议开启“网格视图”（位于顶栏右上角）以获得较好的阅读体验。&lt;/p&gt;
 &lt;p&gt;content完全复制于我的obsidian，损坏的文章/标题链接 请不要在意它。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;你这个设备值不值得被信任？ ^0923e9&lt;/p&gt;
@@ -27,12 +27,12 @@ App / Server 信任判断
   C --&amp;gt;|验证 System 镜像哈希| D(System 分区)
   D --&amp;gt;|验证 Vendor 镜像| E(Vendor 分区)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;关键文件：&lt;code&gt;vbmeta.img&lt;/code&gt; 存储所有以上受保护分区的哈希树、公钥和签名
+&lt;p&gt;关键文件：&lt;code&gt;vbmeta.img&lt;/code&gt; 存储所有以上受保护分区的哈希树、公钥和签名&lt;br /&gt;
 验证失败：触发 &lt;code&gt;verifiedbootstate=red&lt;/code&gt;，等死吧&lt;/p&gt;
 &lt;p&gt;:::note[verifiedbootstate btw]&lt;/p&gt;
-&lt;p&gt;green：官方签名，完整信任链 -&amp;gt; 释放 FBE 密钥 / KDK&lt;/p&gt;
-&lt;p&gt;orange：用户解锁 bl -&amp;gt; 销毁 KDK，仅允许基础功能&lt;/p&gt;
-&lt;p&gt;red：监测到篡改 -&amp;gt; 永久禁用安全服务（包括 Widevine L1 密钥），机都别想开&lt;/p&gt;
+&lt;p&gt;green：官方签名，完整信任链 -&amp;gt; 释放 FBE 密钥 / KDK&lt;br /&gt;
+orange：用户解锁 bl -&amp;gt; 销毁 KDK，仅允许基础功能&lt;br /&gt;
+red：监测到篡改 -&amp;gt; 永久禁用安全服务（包括 Widevine L1 密钥），机都别想开&lt;/p&gt;
 &lt;p&gt;:::&lt;/p&gt;
 &lt;p&gt;AVB 根本就他吗不关心你能不能用 TEE 密钥，要么绿要么橘要么红，红灯直接死，就算绿灯也不代表你设备安全&lt;/p&gt;
 &lt;h3&gt;AVB 与 TEE 的致命关联&lt;/h3&gt;
@@ -40,16 +40,15 @@ App / Server 信任判断
 &lt;hr /&gt;
 &lt;h2&gt;TEE（已炸毁）和他的动物朋友们&lt;/h2&gt;
 &lt;h3&gt;核心概念&lt;/h3&gt;
-&lt;p&gt;TEE（Trust Execution Environment 可信执行环境），是 SoC 中独立于系统的硬件级安全隔离环境（如 ARM Trust Zone）。
+&lt;p&gt;TEE（Trust Execution Environment 可信执行环境），是 SoC 中独立于系统的硬件级安全隔离环境（如 ARM Trust Zone）。&lt;br /&gt;
 保护：指纹支付，DRM 高清内容解密（如 Netflix），存储加密密钥。即便设备被 root 也无法读取 TEE 数据。&lt;/p&gt;
-&lt;p&gt;Root 会破坏 TEE 的完整性。
+&lt;p&gt;Root 会破坏 TEE 的完整性。&lt;br /&gt;
 获取 Root 权限需解锁 Bootloader（触发 [[#^AVB 2.0]] 验证失败），导致：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Verified Boot 失败：系统分区被修改，TEE 监测到非官方签名，拒绝提供安全服务（如指纹支付）&lt;/li&gt;
-&lt;li&gt;密钥吊销：部分厂商（如三星）在检测到 root 后永久熔断 e-fuse，使 TEE 拒绝生成新密钥
-影响：
-支付宝 / 微信指纹支付，银行 app，DRM L1 视频播放（如 4K Netflix）通常失效，根源在于 TEE 拒绝向被篡改的系统提供高密钥。&lt;/li&gt;
+&lt;li&gt;密钥吊销：部分厂商（如三星）在检测到 root 后永久熔断 e-fuse，使 TEE 拒绝生成新密钥&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;支付宝 / 微信指纹支付，银行 app，DRM L1 视频播放（如 4K Netflix）通常失效，根源在于 TEE 拒绝向被篡改的系统提供高密钥。&lt;/p&gt;
 &lt;h3&gt;指纹支付依赖 TEE&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;graph LR
 A[用户按压指纹] --&amp;gt; B(TEE 验证生物特性) 
@@ -59,7 +58,7 @@ D --&amp;gt; E[安全传输至服务器]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;绕过尝试：伪装认证状态但无法恢复 TEE 内部数据&lt;/p&gt;
 &lt;h3&gt;data 分区加密依赖 TEE&lt;/h3&gt;
-&lt;p&gt;FBE（File-Based-Encryption）的密钥由 TEE 保护。FBE 专门用于加密 &lt;code&gt;/data&lt;/code&gt; 分区。FBE 并非全盘加密，不加密 &lt;code&gt;/system&lt;/code&gt;、&lt;code&gt;/vendor&lt;/code&gt; 等系统分区（这些分区通过 [[#^AVB 2.0]] 校验完整性，但不加密）
+&lt;p&gt;FBE（File-Based-Encryption）的密钥由 TEE 保护。FBE 专门用于加密 &lt;code&gt;/data&lt;/code&gt; 分区。FBE 并非全盘加密，不加密 &lt;code&gt;/system&lt;/code&gt;、&lt;code&gt;/vendor&lt;/code&gt; 等系统分区（这些分区通过 [[#^AVB 2.0]] 校验完整性，但不加密）&lt;br /&gt;
 FBE 采用分层密钥结构，人话就是锁屏密码不直接作为加密密钥，而是作为密钥派生凭证&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;graph LR
   A[锁屏密码] --&amp;gt; B(Tee 内部执行 KDF)
@@ -70,19 +69,19 @@ FBE 采用分层密钥结构，人话就是锁屏密码不直接作为加密密�
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;图看不懂？让我们说中文：&lt;/p&gt;
 &lt;p&gt;:::note[TEE 在解密 data 时干的活]&lt;/p&gt;
-&lt;p&gt;1.密钥永不暴露：&lt;/p&gt;
-&lt;p&gt;KDK 在 TEE 内部生并永久存储，操作系统无法读取。锁屏密码只作为输入，在 TEE 内通过 KDF（如 script 或 SHA-256）派生临时密钥&lt;/p&gt;
-&lt;p&gt;2.解密流程：
-用户输入密码 -&amp;gt; 密码哈希值传入 TEE -&amp;gt; TEE 用 KDK 验证哈希 -&amp;gt; 验证成功则释放解密 User Key 所需的密钥 -&amp;gt; User Key 解密 DEK -&amp;gt; DEK 解密文件&lt;/p&gt;
-&lt;p&gt;3.总结：
+&lt;p&gt;1.密钥永不暴露：&lt;br /&gt;
+KDK 在 TEE 内部生并永久存储，操作系统无法读取。锁屏密码只作为输入，在 TEE 内通过 KDF（如 script 或 SHA-256）派生临时密钥&lt;br /&gt;
+2.解密流程：&lt;br /&gt;
+用户输入密码 -&amp;gt; 密码哈希值传入 TEE -&amp;gt; TEE 用 KDK 验证哈希 -&amp;gt; 验证成功则释放解密 User Key 所需的密钥 -&amp;gt; User Key 解密 DEK -&amp;gt; DEK 解密文件&lt;br /&gt;
+3.总结：&lt;br /&gt;
 FBE 的加密密钥不是锁屏密码，厂商也不允许导出 KDK&lt;/p&gt;
 &lt;p&gt;:::&lt;/p&gt;
 &lt;h3&gt;TEE 硬件熔断&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;[!WARNING]
-如果你去问 AI “关于硬件熔断各大手机厂商的做法”，你很有可能得不到正确的答案。
-例如，&lt;s&gt;解锁 bl = 熔断硬件保险丝（如高通 frp 分区），即使重锁也无法恢复 green 状态（e-fuse 物理熔断不可逆）&lt;/s&gt; 这句话中包含两个严重的错误！&lt;/p&gt;
-&lt;p&gt;TEE 熔断的具体机制远比想象中和 AIGC 回答的复杂得多！&lt;/p&gt;
+如果你去问 AI “关于硬件熔断各大手机厂商的做法”，你很有可能得不到正确的答案。&lt;br /&gt;
+例如，&lt;s&gt;解锁 bl = 熔断硬件保险丝（如高通 frp 分区），即使重锁也无法恢复 green 状态（e-fuse 物理熔断不可逆）&lt;/s&gt; 这句话中包含两个严重的错误！&lt;br /&gt;
+TEE 熔断的具体机制远比想象中和 AIGC 回答的复杂得多！&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;具体请见 [[硬件熔断]]&lt;/p&gt;
 &lt;h3&gt;Keymaster TA&lt;/h3&gt;
@@ -117,13 +116,9 @@ FBE 的加密密钥不是锁屏密码，厂商也不允许导出 KDK&lt;/p&gt;
 &lt;h3&gt;DRM 和 Widevine&lt;/h3&gt;
 &lt;p&gt;Widevine / DRM 与 Keymaster TA 并列，同属 TEE 内的 Trusted Application&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;TEE / Secure World
-
   ├─ Keymaster TA        ← 身份 / Attestation
-
   ├─ Widevine TA         ← DRM / 内容解密
-
   ├─ Gatekeeper TA       ← 生物识别
-
   └─ OEM Security TA     ← 熔断 / 状态机
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;:::note[QUESTION]&lt;/p&gt;
@@ -137,41 +132,41 @@ FBE 的加密密钥不是锁屏密码，厂商也不允许导出 KDK&lt;/p&gt;
 &lt;li&gt;播放环境可控&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;回答的是“我愿不愿意把内容解密给你？”，而不是“你这个设备值不值得被信任 [[#^0923e9]]”&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;如果你无法理解以上 从“回答问题”角度的解释，那么我再从“安全边界”角度解释一次。
+&lt;p&gt;如果你无法理解以上 从“回答问题”角度的解释，那么我再从“安全边界”角度解释一次。&lt;br /&gt;
 安全边界有两条：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;身份边界（Attestation）
-AVB → TEE → ==Keymaster → SafetyNet / Integrity==
+&lt;li&gt;身份边界（Attestation）&lt;br /&gt;
+AVB → TEE → Keymaster → SafetyNet / Integrity&lt;br /&gt;
 用于支付，银行，反作弊。&lt;/li&gt;
-&lt;li&gt;内容边界（DRM）
-AVB → TEE → ==Widevine TA → Secure Video Path==
-用于一坨流媒体软件的 hIdH dEfiNiTiOn 支援。
+&lt;li&gt;内容边界（DRM）&lt;br /&gt;
+AVB → TEE → Widevine TA → Secure Video Path&lt;br /&gt;
+用于一坨流媒体软件的 hIdH dEfiNiTiOn 支援。&lt;br /&gt;
 注意到 DRM 不依赖 Keymaster，也就是说 StrongBox 不是 DRM 的必须组件。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4&gt;Widevine&lt;/h4&gt;
-&lt;p&gt;是 Google 的 DRM 方案，被 Netflix / YouTube / Amazon / Disney+ 等采用。
+&lt;p&gt;是 Google 的 DRM 方案，被 Netflix / YouTube / Amazon / Disney+ 等采用。&lt;br /&gt;
 它是一套密钥管理 + 加解密 + 授权协议，一套与 TEE 深度绑定的安全架构。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Widevine 的三个等级&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;L1
+&lt;li&gt;L1&lt;br /&gt;
 密钥和解密都在 TEE 内。它依赖 TEE 状态、OEM 标志和 DRM 私钥 ^a844e0&lt;/li&gt;
-&lt;li&gt;L2
+&lt;li&gt;L2&lt;br /&gt;
 密钥在 TEE 内，解密在 Android 世界，理论存在但很少见&lt;/li&gt;
-&lt;li&gt;L3
+&lt;li&gt;L3&lt;br /&gt;
 密钥和解密都在 Android 世界，完全不信任硬件，不依赖 TEE&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;一旦 Widevine L1 掉了（Widevine TA 被永久降级）就回不来了，不是“丢了”而是“被吊销”。
+&lt;p&gt;一旦 Widevine L1 掉了（Widevine TA 被永久降级）就回不来了，不是“丢了”而是“被吊销”。&lt;br /&gt;
 因为 L1 所依赖的 [[#^a844e0]] 这些不在 AVB，不可刷回，不可恢复出厂。&lt;/p&gt;
 &lt;h3&gt;钥匙盒子 Keybox&lt;/h3&gt;
-&lt;p&gt;Keybox 是一份设备出厂时注入的、与硬件绑定的 DRM 身份凭据。
+&lt;p&gt;Keybox 是一份设备出厂时注入的、与硬件绑定的 DRM 身份凭据。&lt;br /&gt;
 它包含（概念层面）：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;设备 DRM 私钥材料&lt;/li&gt;
 &lt;li&gt;OEM / Google 签名&lt;/li&gt;
 &lt;li&gt;设备型号、厂商信息&lt;/li&gt;
-&lt;li&gt;绑定 SoC / TEE 的信息
-它不在 system/vendor，不在 vbmeta，普通刷机永远接触不到。&lt;/li&gt;
+&lt;li&gt;绑定 SoC / TEE 的信息&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;它不在 system/vendor，不在 vbmeta，普通刷机永远接触不到。&lt;/p&gt;
 &lt;p&gt;谷歌吊销 Revoke 机制：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;触发条件：
@@ -196,8 +191,8 @@ AVB → TEE → ==Widevine TA → Secure Video Path==
 &lt;li&gt;API 钩子：拦截 &lt;code&gt;SafetyNet&lt;/code&gt;、&lt;code&gt;Play Integrity&lt;/code&gt; 的检测窗口，返回合法响应&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4&gt;我是低调的黑客&lt;/h4&gt;
-&lt;p&gt;你所能接触到的 keybox.xml 文件，只是某些模块 / 工具使用的“伪身份材料”。&lt;/p&gt;
-&lt;p&gt;让我们随机挑选一个 2024 年 11 月在 tg 流传并高价售卖的 keybox.xml 文件&lt;/p&gt;
+&lt;p&gt;你所能接触到的 keybox.xml 文件，只是某些模块 / 工具使用的“伪身份材料”。&lt;br /&gt;
+让我们随机挑选一个 2024 年 11 月在 tg 流传并高价售卖的 keybox.xml 文件：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;AndroidAttestation&amp;gt;
   &amp;lt;NumberOfKeyboxes&amp;gt;1&amp;lt;/NumberOfKeyboxes&amp;gt;
   &amp;lt;Keybox DeviceID=&quot;Telegram @BDovo_Channel&quot;&amp;gt;
@@ -213,7 +208,7 @@ AVB → TEE → ==Widevine TA → Secure Video Path==
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;一眼盯真鉴定为死刑&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;出现了明文的 EC PRIVATE KEY&lt;/p&gt;
+&lt;p&gt;出现了明文的 EC PRIVATE&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;这是他吗人类、root、内核、fastboot 理论上都拿不到的东西（暂时不谈记忆里怎么有人提取的）&lt;/p&gt;
 &lt;p&gt;这份文件刻意模仿了 Keybox 的外形，包括&lt;/p&gt;
@@ -221,14 +216,14 @@ AVB → TEE → ==Widevine TA → Secure Video Path==
 &lt;li&gt;ECDSA Key&lt;/li&gt;
 &lt;li&gt;CertificateChain&lt;/li&gt;
 &lt;li&gt;Android Attestation 结构&lt;/li&gt;
-&lt;li&gt;看起来像是设备身份
-所以这份文件是给 Android 世界看的。Tricky Store 使用伪造 Attestaion / Keybox 描述 伪装上层，影响了 Android API 返回和大部分 APP 的判断&lt;/li&gt;
+&lt;li&gt;看起来像是设备身份&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;所以这份文件是给 Android 世界看的。Tricky Store 使用伪造 Attestaion / Keybox 描述 伪装上层，影响了 Android API 返回和大部分 APP 的判断&lt;/p&gt;
 &lt;p&gt;那 Google 吊销的 KeyBox 到底是什么就可以精确定义了：被吊销的是 Google DRM Server 不再信任某个“真实、TEE 内生成的 KeyBox 身份”，而不是这种 XML，这种模块都能替换的东西。&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h2&gt;SafetyNet 和 Play Integrity API&lt;/h2&gt;
 &lt;h3&gt;核心概念&lt;/h3&gt;
-&lt;p&gt;远程设备完整性与可信状态证明服务，&lt;strong&gt;不验证启动，只验证 TA 是否能给出硬件签名&lt;/strong&gt;（已逐步被 Play Integrity API 取代）
+&lt;p&gt;远程设备完整性与可信状态证明服务，&lt;strong&gt;不验证启动，只验证 TA 是否能给出硬件签名&lt;/strong&gt;（已逐步被 Play Integrity API 取代）&lt;br /&gt;
 Google 在 SafetyNet 中首次把 TEE/StrongBox 的 Attestation 能力强制暴露给 APP&lt;/p&gt;
 &lt;p&gt;他不是本地安全机制，而是：&lt;/p&gt;
 &lt;ul&gt;
@@ -282,9 +277,9 @@ Google 在 SafetyNet 中首次把 TEE/StrongBox 的 Attestation 能力强制暴�
 &lt;/table&gt;
 &lt;h3&gt;Google Play Integrity API&lt;/h3&gt;
 &lt;p&gt;来都来了，再看看占上风的 Play Integrity API 吧&lt;/p&gt;
-&lt;p&gt;这是给开发者 / 服务器用的 设备与应用完整性证明接口，是 SafetyNet 的继任者。
+&lt;p&gt;这是给开发者 / 服务器用的 设备与应用完整性证明接口，是 SafetyNet 的继任者。&lt;br /&gt;
 （请区别于 Play Protect/Play 保护机制，那是给用户用的本地恶意软件防护与应用扫描机制）&lt;/p&gt;
-&lt;p&gt;它的作用是让 APP 判断：这个请求是不是来自一个“未被篡改、未被滥用、可信的 Android 设备与 APP 实例”
+&lt;p&gt;它的作用是让 APP 判断：这个请求是不是来自一个“未被篡改、未被滥用、可信的 Android 设备与 APP 实例”&lt;br /&gt;
 它检查的维度包括设备完整性、应用完整性和账号 / 环境。&lt;/p&gt;
 &lt;p&gt;为什么 Google 要换掉 SafetyNet？&lt;/p&gt;
 &lt;ul&gt;
