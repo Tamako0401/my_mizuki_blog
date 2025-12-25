@@ -14,7 +14,7 @@
 			} else {
 				setTimeout(loadAnalytics, 3000);
 			}
-		</script><title>Wplace：一场人间闹剧 - y11han&#39;s icu</title><meta charset="UTF-8"><meta name="description" content="瞻顾遗迹，如在昨日，令人长号不自禁。"><meta name="author" content="Y11Han"><meta property="og:site_name" content="y11han's icu"><meta property="og:url" content="https://blog.y11han.icu/posts/wplace/"><meta property="og:title" content="Wplace：一场人间闹剧 - y11han's icu"><meta property="og:description" content="瞻顾遗迹，如在昨日，令人长号不自禁。"><meta property="og:type" content="article"><meta name="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.y11han.icu/posts/wplace/"><meta name="twitter:title" content="Wplace：一场人间闹剧 - y11han's icu"><meta name="twitter:description" content="瞻顾遗迹，如在昨日，令人长号不自禁。"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.16.3"><link rel="icon" href="/favicon/favicon.ico" sizes="64x64" media="(prefers-color-scheme: light)"><link rel="icon" href="/favicon/favicon.ico" sizes="64x64" media="(prefers-color-scheme: dark)"><!-- Set the theme before the page is rendered to avoid a flash --><script>(function(){const DEFAULT_THEME = "light";
+		</script><title>我对安卓设备启动信任链的理解 - y11han&#39;s icu</title><meta charset="UTF-8"><meta name="description" content="只作为个人学习笔记使用"><meta name="author" content="Y11Han"><meta property="og:site_name" content="y11han's icu"><meta property="og:url" content="https://blog.y11han.icu/posts/android-device-boot-trust-chain/"><meta property="og:title" content="我对安卓设备启动信任链的理解 - y11han's icu"><meta property="og:description" content="只作为个人学习笔记使用"><meta property="og:type" content="article"><meta name="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.y11han.icu/posts/android-device-boot-trust-chain/"><meta name="twitter:title" content="我对安卓设备启动信任链的理解 - y11han's icu"><meta name="twitter:description" content="只作为个人学习笔记使用"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.16.3"><link rel="icon" href="/favicon/favicon.ico" sizes="64x64" media="(prefers-color-scheme: light)"><link rel="icon" href="/favicon/favicon.ico" sizes="64x64" media="(prefers-color-scheme: dark)"><!-- Set the theme before the page is rendered to avoid a flash --><script>(function(){const DEFAULT_THEME = "light";
 const LIGHT_MODE = "light";
 const DARK_MODE = "dark";
 const BANNER_HEIGHT_EXTEND = 30;
@@ -52,7 +52,7 @@ const configHue = 290;
 			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
 			offset = offset - offset % 4;
 			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
-		})();</script><!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Wplace：一场人间闹剧","description":"瞻顾遗迹，如在昨日，令人长号不自禁。","keywords":["life","philosophy"],"author":{"@type":"Person","name":"Y11Han","url":"https://blog.y11han.icu/"},"datePublished":"2025-09-06","inLanguage":"zh-CN"}</script><!-- Pio 看板娘样式 - 仅在启用时加载 --><link rel="alternate" type="application/rss+xml" title="Y11Han" href="https://blog.y11han.icu/rss.xml"><!-- Umami Analytics --><script defer src="https://cloud.umami.is/script.js" data-website-id="6d7a4e62-cf57-493e-8555-68b0fda9c24a"></script><link rel="stylesheet" href="/_astro/Layout.omPQcCVA.css">
+		})();</script><!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"我对安卓设备启动信任链的理解","description":"只作为个人学习笔记使用","keywords":["device","security"],"author":{"@type":"Person","name":"Y11Han","url":"https://blog.y11han.icu/"},"datePublished":"2025-12-25","inLanguage":"zh-CN"}</script><!-- Pio 看板娘样式 - 仅在启用时加载 --><link rel="alternate" type="application/rss+xml" title="Y11Han" href="https://blog.y11han.icu/rss.xml"><!-- Umami Analytics --><script defer src="https://cloud.umami.is/script.js" data-website-id="6d7a4e62-cf57-493e-8555-68b0fda9c24a"></script><link rel="stylesheet" href="/_astro/Layout.omPQcCVA.css">
 <link rel="stylesheet" href="/_astro/Layout.DRe9SoLl.css">
 <style>.password-protection[data-astro-cid-732embm3]{display:flex;justify-content:center;align-items:center;min-height:60vh;padding:2rem}.password-container[data-astro-cid-732embm3]{text-align:center;max-width:400px;width:100%;padding:2rem;border-radius:12px;background:transparent;border:1px solid var(--line-divider);box-shadow:none}.lock-icon[data-astro-cid-732embm3]{margin-bottom:1rem;color:var(--primary)}.password-container[data-astro-cid-732embm3] h2[data-astro-cid-732embm3]{margin-bottom:.5rem;color:#000000d9;font-size:1.5rem}.dark .password-container[data-astro-cid-732embm3] h2[data-astro-cid-732embm3]{color:#ffffffd9}.password-container[data-astro-cid-732embm3] p[data-astro-cid-732embm3]{margin-bottom:1.5rem;color:#000000bf;opacity:.8}.dark .password-container[data-astro-cid-732embm3] p[data-astro-cid-732embm3]{color:#ffffffbf}.password-input-group[data-astro-cid-732embm3]{display:flex;gap:.5rem;margin-bottom:1rem;align-items:stretch}.password-input[data-astro-cid-732embm3]{flex:1;min-width:0;padding:.75rem 1rem;border:1px solid var(--line-divider);border-radius:8px;background:transparent;color:#000000d9;font-size:1rem;transition:border-color .2s ease}.dark .password-input[data-astro-cid-732embm3]{color:#ffffffd9}.password-input[data-astro-cid-732embm3]::-moz-placeholder{color:#00000080}.password-input[data-astro-cid-732embm3]::placeholder{color:#00000080}.dark .password-input[data-astro-cid-732embm3]::-moz-placeholder{color:#ffffff80}.dark .password-input[data-astro-cid-732embm3]::placeholder{color:#ffffff80}.password-input[data-astro-cid-732embm3]:focus{outline:none;border-color:var(--primary)}.unlock-button[data-astro-cid-732embm3]{padding:.75rem 1.5rem;background:transparent;color:var(--primary);border:1px solid var(--primary);border-radius:8px;font-size:1rem;cursor:pointer;transition:border-color .2s,color .2s,background .2s;white-space:nowrap;flex-shrink:0;min-width:-moz-fit-content;min-width:fit-content;max-width:-moz-max-content;max-width:max-content}.unlock-button[data-astro-cid-732embm3]:hover{background:var(--primary);color:#fff;border-color:var(--primary)}.unlock-button[data-astro-cid-732embm3]:disabled{opacity:.6;cursor:not-allowed}.error-message[data-astro-cid-732embm3]{color:#ef4444;font-size:.875rem;margin-top:.5rem}.decrypted-content[data-astro-cid-732embm3]{animation:fadeIn .3s ease-in-out}@keyframes fadeIn{0%{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@media(min-width:769px){.password-input-group[data-astro-cid-732embm3]{flex-wrap:nowrap}.unlock-button[data-astro-cid-732embm3]{max-width:40%}}@media(max-width:768px){.password-protection[data-astro-cid-732embm3]{padding:1rem;min-height:50vh}.password-container[data-astro-cid-732embm3]{max-width:none;width:100%;padding:1.5rem;margin:0 .5rem}.password-container[data-astro-cid-732embm3] h2[data-astro-cid-732embm3]{font-size:1.25rem;margin-bottom:.75rem}.password-container[data-astro-cid-732embm3] p[data-astro-cid-732embm3]{font-size:.9rem;margin-bottom:1.25rem}.password-input-group[data-astro-cid-732embm3]{flex-direction:column;gap:.75rem}.password-input[data-astro-cid-732embm3]{padding:.875rem 1rem;font-size:1rem;width:100%}.unlock-button[data-astro-cid-732embm3]{padding:.875rem 1rem;font-size:1rem;max-width:100%;width:100%;white-space:nowrap}.error-message[data-astro-cid-732embm3]{font-size:.8rem;text-align:center}}@media(max-width:480px){.password-protection[data-astro-cid-732embm3]{padding:.75rem}.password-container[data-astro-cid-732embm3]{padding:1.25rem;margin:0 .25rem}.password-container[data-astro-cid-732embm3] h2[data-astro-cid-732embm3]{font-size:1.125rem}.password-container[data-astro-cid-732embm3] p[data-astro-cid-732embm3]{font-size:.85rem}.password-input[data-astro-cid-732embm3],.unlock-button[data-astro-cid-732embm3]{padding:.75rem .875rem;font-size:.95rem}}
 </style>
@@ -1113,14 +1113,14 @@ const yearSuffix = "年";
     // 之后每24小时更新一次
     setInterval(renderCalendar, 24 * 60 * 60 * 1000);
   }, msUntilMidnight);
-})();</script>  </div> <!-- 粘性组件区域 -->  </div> <!-- 响应式样式和JavaScript -->  <script type="module" src="/_astro/RightSideBar.astro_astro_type_script_index_0_lang.IDIgVyEz.js"></script></div> <main id="swup-container" class="transition-swup-fade overflow-hidden w-full col-span-1 row-start-1 row-end-2 col-span-1 row-start-1 row-end-2 lg:col-start-2 lg:col-end-3 lg:col-start-2 lg:col-end-3 transition-main" data-astro-cid-haiuh7kc> <div id="content-wrapper" class="onload-animation transition-leaving" data-astro-cid-haiuh7kc> <!-- the overflow-hidden here prevent long text break the layout--> <!-- make id different from windows.swup global property -->    <script type="module" src="/_astro/_...slug_.astro_astro_type_script_index_0_lang.dvY850Ym.js"></script> <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4"> <div id="post-container" class="card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full "> <!-- word count and reading time --> <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation"> <div class="flex flex-row items-center"> <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"> <svg width="1em" height="1em" data-icon="material-symbols:notes-rounded">   <symbol id="ai:material-symbols:notes-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h10q.425 0 .713.288T15 17t-.288.713T14 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"/></symbol><use href="#ai:material-symbols:notes-rounded"></use>  </svg> </div> <div class="text-sm"> 255  字 </div> </div> <div class="flex flex-row items-center"> <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"> <svg width="1em" height="1em" data-icon="material-symbols:schedule-outline-rounded">   <symbol id="ai:material-symbols:schedule-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M13 11.6V8q0-.425-.288-.712T12 7t-.712.288T11 8v3.975q0 .2.075.388t.225.337l3.3 3.3q.275.275.7.275T16 16t.275-.7t-.275-.7zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.325 0 5.663-2.337T20 12t-2.337-5.663T12 4T6.337 6.338T4 12t2.338 5.663T12 20"/></symbol><use href="#ai:material-symbols:schedule-outline-rounded"></use>  </svg> </div> <div class="text-sm"> 1  分钟 </div> </div> </div> <!-- title --> <div class="relative onload-animation"> <div data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title" class="transition w-full block font-bold mb-3
+})();</script>  </div> <!-- 粘性组件区域 -->  </div> <!-- 响应式样式和JavaScript -->  <script type="module" src="/_astro/RightSideBar.astro_astro_type_script_index_0_lang.IDIgVyEz.js"></script></div> <main id="swup-container" class="transition-swup-fade overflow-hidden w-full col-span-1 row-start-1 row-end-2 col-span-1 row-start-1 row-end-2 lg:col-start-2 lg:col-end-3 lg:col-start-2 lg:col-end-3 transition-main" data-astro-cid-haiuh7kc> <div id="content-wrapper" class="onload-animation transition-leaving" data-astro-cid-haiuh7kc> <!-- the overflow-hidden here prevent long text break the layout--> <!-- make id different from windows.swup global property -->    <script type="module" src="/_astro/_...slug_.astro_astro_type_script_index_0_lang.dvY850Ym.js"></script> <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4"> <div id="post-container" class="card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full "> <!-- word count and reading time --> <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation"> <div class="flex flex-row items-center"> <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"> <svg width="1em" height="1em" data-icon="material-symbols:notes-rounded">   <symbol id="ai:material-symbols:notes-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h10q.425 0 .713.288T15 17t-.288.713T14 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"/></symbol><use href="#ai:material-symbols:notes-rounded"></use>  </svg> </div> <div class="text-sm"> 2732  字 </div> </div> <div class="flex flex-row items-center"> <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"> <svg width="1em" height="1em" data-icon="material-symbols:schedule-outline-rounded">   <symbol id="ai:material-symbols:schedule-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M13 11.6V8q0-.425-.288-.712T12 7t-.712.288T11 8v3.975q0 .2.075.388t.225.337l3.3 3.3q.275.275.7.275T16 16t.275-.7t-.275-.7zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.325 0 5.663-2.337T20 12t-2.337-5.663T12 4T6.337 6.338T4 12t2.338 5.663T12 20"/></symbol><use href="#ai:material-symbols:schedule-outline-rounded"></use>  </svg> </div> <div class="text-sm"> 14  分钟 </div> </div> </div> <!-- title --> <div class="relative onload-animation"> <div data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title" class="transition w-full block font-bold mb-3
                     text-3xl md:text-[2.25rem]/[2.75rem]
                     text-black/90 dark:text-white/90
                     md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
-                    before:absolute before:top-[0.75rem] before:left-[-1.125rem]"> Wplace：一场人间闹剧 </div> </div> <!-- metadata --> <div class="onload-animation"> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-5"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <symbol id="ai:material-symbols:calendar-today-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V3q0-.425.288-.712T7 2t.713.288T8 3v1h8V3q0-.425.288-.712T17 2t.713.288T18 3v1h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></symbol><use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2025-09-06</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <symbol id="ai:material-symbols:book-2-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M6 15.325q.35-.175.725-.25T7.5 15H8V4h-.5q-.625 0-1.062.438T6 5.5zM10 15h8V4h-8zm-4 .325V4zM7.5 22q-1.45 0-2.475-1.025T4 18.5v-13q0-1.45 1.025-2.475T7.5 2H18q.825 0 1.413.587T20 4v12.525q0 .2-.162.363t-.588.362q-.35.175-.55.5t-.2.75t.2.763t.55.487t.55.413t.2.562v.25q0 .425-.288.725T19 22zm0-2h9.325q-.15-.35-.237-.712T16.5 18.5q0-.4.075-.775t.25-.725H7.5q-.65 0-1.075.438T6 18.5q0 .65.425 1.075T7.5 20"/></symbol><use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?uncategorized=true" aria-label="View all posts in the undefined category" class="link-lg transition text-50 text-sm font-medium
-                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 未分类 </a> </div> </div> <!-- word count -->  <!-- tags (只有在不显示基本元数据时才显示) --> <div class="items-center flex"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:tag-rounded">   <symbol id="ai:material-symbols:tag-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m9 16l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T6.3 18.8L7 16H4.275q-.5 0-.8-.387T3.3 14.75q.075-.35.35-.55t.625-.2H7.5l1-4H5.775q-.5 0-.8-.387T4.8 8.75q.075-.35.35-.55t.625-.2H9l.825-3.275Q9.9 4.4 10.15 4.2t.6-.2q.475 0 .775.375t.175.825L11 8h4l.825-3.275q.075-.325.325-.525t.6-.2q.475 0 .775.375t.175.825L17 8h2.725q.5 0 .8.387t.175.863q-.075.35-.35.55t-.625.2H16.5l-1 4h2.725q.5 0 .8.388t.175.862q-.075.35-.35.55t-.625.2H15l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T12.3 18.8L13 16zm.5-2h4l1-4h-4z"/></symbol><use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center">  <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div> <a href="/archive/?tag=life" aria-label="View all posts with the life tag" class="link-lg transition text-50 text-sm font-medium
-                                        hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> life </a>  <div class="mx-1.5 text-[var(--meta-divider)] text-sm">/</div> <a href="/archive/?tag=philosophy" aria-label="View all posts with the philosophy tag" class="link-lg transition text-50 text-sm font-medium
-                                        hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> philosophy </a>   </div> </div> <!-- 访问量（首页不显示，且umami.enabled为true时显示） --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:visibility-outline-rounded">   <symbol id="ai:material-symbols:visibility-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M12 16q1.875 0 3.188-1.312T16.5 11.5t-1.312-3.187T12 7T8.813 8.313T7.5 11.5t1.313 3.188T12 16m0-1.8q-1.125 0-1.912-.788T9.3 11.5t.788-1.912T12 8.8t1.913.788t.787 1.912t-.787 1.913T12 14.2m0 4.8q-3.35 0-6.113-1.8t-4.362-4.75q-.125-.225-.187-.462t-.063-.488t.063-.488t.187-.462q1.6-2.95 4.363-4.75T12 4t6.113 1.8t4.362 4.75q.125.225.188.463t.062.487t-.062.488t-.188.462q-1.6 2.95-4.362 4.75T12 19m0-2q2.825 0 5.188-1.487T20.8 11.5q-1.25-2.525-3.613-4.012T12 6T6.813 7.488T3.2 11.5q1.25 2.525 3.613 4.013T12 17"/></symbol><use href="#ai:material-symbols:visibility-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium" id="page-views-display">统计加载中...</span> </div> </div> <!-- 只有在非首页且启用umami且有slug时才加载脚本 --> <script>(function(){const id = "wplace";
+                    before:absolute before:top-[0.75rem] before:left-[-1.125rem]"> 我对安卓设备启动信任链的理解 </div> </div> <!-- metadata --> <div class="onload-animation"> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-5"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <symbol id="ai:material-symbols:calendar-today-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V3q0-.425.288-.712T7 2t.713.288T8 3v1h8V3q0-.425.288-.712T17 2t.713.288T18 3v1h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></symbol><use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2025-12-25</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <symbol id="ai:material-symbols:book-2-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M6 15.325q.35-.175.725-.25T7.5 15H8V4h-.5q-.625 0-1.062.438T6 5.5zM10 15h8V4h-8zm-4 .325V4zM7.5 22q-1.45 0-2.475-1.025T4 18.5v-13q0-1.45 1.025-2.475T7.5 2H18q.825 0 1.413.587T20 4v12.525q0 .2-.162.363t-.588.362q-.35.175-.55.5t-.2.75t.2.763t.55.487t.55.413t.2.562v.25q0 .425-.288.725T19 22zm0-2h9.325q-.15-.35-.237-.712T16.5 18.5q0-.4.075-.775t.25-.725H7.5q-.65 0-1.075.438T6 18.5q0 .65.425 1.075T7.5 20"/></symbol><use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?uncategorized=true" aria-label="View all posts in the undefined category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 未分类 </a> </div> </div> <!-- word count -->  <!-- tags (只有在不显示基本元数据时才显示) --> <div class="items-center flex"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:tag-rounded">   <symbol id="ai:material-symbols:tag-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m9 16l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T6.3 18.8L7 16H4.275q-.5 0-.8-.387T3.3 14.75q.075-.35.35-.55t.625-.2H7.5l1-4H5.775q-.5 0-.8-.387T4.8 8.75q.075-.35.35-.55t.625-.2H9l.825-3.275Q9.9 4.4 10.15 4.2t.6-.2q.475 0 .775.375t.175.825L11 8h4l.825-3.275q.075-.325.325-.525t.6-.2q.475 0 .775.375t.175.825L17 8h2.725q.5 0 .8.387t.175.863q-.075.35-.35.55t-.625.2H16.5l-1 4h2.725q.5 0 .8.388t.175.862q-.075.35-.35.55t-.625.2H15l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T12.3 18.8L13 16zm.5-2h4l1-4h-4z"/></symbol><use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center">  <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div> <a href="/archive/?tag=device" aria-label="View all posts with the device tag" class="link-lg transition text-50 text-sm font-medium
+                                        hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> device </a>  <div class="mx-1.5 text-[var(--meta-divider)] text-sm">/</div> <a href="/archive/?tag=security" aria-label="View all posts with the security tag" class="link-lg transition text-50 text-sm font-medium
+                                        hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> security </a>   </div> </div> <!-- 访问量（首页不显示，且umami.enabled为true时显示） --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:visibility-outline-rounded">   <symbol id="ai:material-symbols:visibility-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M12 16q1.875 0 3.188-1.312T16.5 11.5t-1.312-3.187T12 7T8.813 8.313T7.5 11.5t1.313 3.188T12 16m0-1.8q-1.125 0-1.912-.788T9.3 11.5t.788-1.912T12 8.8t1.913.788t.787 1.912t-.787 1.913T12 14.2m0 4.8q-3.35 0-6.113-1.8t-4.362-4.75q-.125-.225-.187-.462t-.063-.488t.063-.488t.187-.462q1.6-2.95 4.363-4.75T12 4t6.113 1.8t4.362 4.75q.125.225.188.463t.062.487t-.062.488t-.188.462q-1.6 2.95-4.362 4.75T12 19m0-2q2.825 0 5.188-1.487T20.8 11.5q-1.25-2.525-3.613-4.012T12 6T6.813 7.488T3.2 11.5q1.25 2.525 3.613 4.013T12 17"/></symbol><use href="#ai:material-symbols:visibility-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium" id="page-views-display">统计加载中...</span> </div> </div> <!-- 只有在非首页且启用umami且有slug时才加载脚本 --> <script>(function(){const id = "android-device-boot-trust-chain";
 const umamiBaseUrl = "https://api.umami.is";
 const umamiApiKey = "api_yIobsQH9V9WEpZJkguIpFTwJa03zdZUy";
 const umamiWebsiteId = "6d7a4e62-cf57-493e-8555-68b0fda9c24a";
@@ -1166,11 +1166,1643 @@ const umamiConfig = {"enabled":true,"apiKey":"api_yIobsQH9V9WEpZJkguIpFTwJa03zdZ
         } else {
             fetchPageViews();
         }
-    })();</script>  </div> <!-- always show cover as long as it has one -->  <div class="mt-4"></div> <div id="post-cover" class="mb-8 rounded-xl banner-container onload-animation overflow-hidden relative"> <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div> <img src="/_astro/wplace.BGJGVlpo_Z18Aqyu.webp" alt style="object-position: center" loading="lazy" decoding="async" fetchpriority="auto" width="1600" height="900" class="w-full h-full object-cover">  </div>   <div data-pagefind-body class="prose dark:prose-invert prose-base !max-w-none custom-md mb-6 markdown-content onload-animation"> <!--<div class="prose dark:prose-invert max-w-none custom-md">--> <!--<div class="max-w-none custom-md">-->  <p>作为 Wplace 的东方主战场，南京像素地发生了一场又一场大型在线人间喜剧：平民玩家变身精神拿破仑，熬夜挂机攒点数，运筹帷幄构筑像素堡垒；地主们拉帮结派抢地盘，比大妈抢特价鸡蛋，屌丝抢特惠国窖还要积极；中立派沦为赛博黑奴，一边收钱毁画，一边高调宣布“艺术无罪”“领土不容侵犯”，堪称赛博世纪高级人格分裂；更别提那些反水大师，突然键政，一幅旗帜引爆全区，还觉得自己才是主角。</p>
-<p>像素战场，忠奸难辨，每个人都觉得自己在打一场正义之战，然而在不同人眼里，这更像一场激情四射又荒诞拉满的文化战争。每一位创作者完成了自我赋予的使命，每一幅像素画拼凑出了这个时代光怪陆离的意识形态拼图。</p>  </div> <script type="module">document.addEventListener("click",function(i){const c=i.target;if(c&&c.classList.contains("copy-btn")){const l=c.closest("pre")?.querySelector("code");let s="";if(l){const t=l.querySelectorAll("span.line");if(t.length>0){const o=[];for(let e=0;e<t.length;e++){const r=t[e].textContent||"";o.push(r)}s=o.join(`
+    })();</script>  </div> <!-- always show cover as long as it has one -->  <div class="mt-4"></div> <div id="post-cover" class="mb-8 rounded-xl banner-container onload-animation overflow-hidden relative"> <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div> <img src="/_astro/boot.CTmIe61o_Z1siOLK.webp" alt style="object-position: center" loading="lazy" decoding="async" fetchpriority="auto" width="1024" height="1024" class="w-full h-full object-cover">  </div>   <div data-pagefind-body class="prose dark:prose-invert prose-base !max-w-none custom-md mb-6 markdown-content onload-animation"> <!--<div class="prose dark:prose-invert max-w-none custom-md">--> <!--<div class="max-w-none custom-md">-->  <blockquote class="admonition bdm-tip"><span class="bdm-title">TIP</span><p>阅读此篇文章时，建议开启“网络视图”（位于顶栏右上角）以获得较好的阅读体验。</p><p>content完全复制于我的obsidian，损坏的文章/标题链接 请不要在意它。</p></blockquote>
+<p>你这个设备值不值得被信任？ ^0923e9</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.xyvso.css"><script type="module" src="/_astro/ec.g1fg5.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="code" class="wrap" style="--ecMaxLine:43ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#24292e;--1:#e1e4e8">Boot ROM          &#x3C;- SoC 固化，不可改</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">  </span></span><span style="--0:#24292e;--1:#e1e4e8">↓</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#24292e;--1:#e1e4e8">AVB (vbmeta)      &#x3C;- 启动完整性（你启动的是不是官方系统）</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">  </span></span><span style="--0:#24292e;--1:#e1e4e8">↓</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#24292e;--1:#e1e4e8">Bootloader / Kernel</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">  </span></span><span style="--0:#24292e;--1:#e1e4e8">↓</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span style="--0:#24292e;--1:#e1e4e8">TEE / StrongBox   &#x3C;- 设备是否“硬件可信”，真正裁判</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">  </span></span><span style="--0:#24292e;--1:#e1e4e8">├Keymaster Attestation</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">  </span></span><span style="--0:#24292e;--1:#e1e4e8">↓</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span style="--0:#24292e;--1:#e1e4e8">SafetyNet Hardware Attestation   &#x3C;- 我要不要相信你</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">  </span></span><span style="--0:#24292e;--1:#e1e4e8">↓</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span style="--0:#24292e;--1:#e1e4e8">App / Server 信任判断</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div>
+<p><del>这个流程图太重要了我上来就要放</del></p>
+<section><h2 id="avb-20">AVB 2.0<a class="anchor" href="#avb-20"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="核心机制">核心机制<a class="anchor" href="#核心机制"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>AVB（Android Verified Boot）是 Google 强制推行的启动链完整性验证框架（Android 8.0+），用于验证从 BootROM 到 System 分区的每一级启动镜像是否被修改，包括 <code>boot.img</code> <code>vendor_boot.img</code> <code>system/vendor/product</code> <code>vbmeta 本身</code></p><div class="mermaid-diagram-container"><div class="mermaid-wrapper" id="mermaid-9q8e0t"><div class="mermaid" data-mermaid-code="graph LR
+  A[BootROM] -->|验证签名| B(Bootloader)
+  B -->|验证 vbmeta 哈希| C(Boot 镜像)
+  C -->|验证 System 镜像哈希| D(System 分区)
+  D -->|验证 Vendor 镜像| E(Vendor 分区)">graph LR
+  A[BootROM] -->|验证签名| B(Bootloader)
+  B -->|验证 vbmeta 哈希| C(Boot 镜像)
+  C -->|验证 System 镜像哈希| D(System 分区)
+  D -->|验证 Vendor 镜像| E(Vendor 分区)</div></div><script type="text/javascript">(() => {
+	// 单例模式：检查是否已经初始化过
+	if (window.mermaidInitialized) {
+		return;
+	}
+
+	window.mermaidInitialized = true;
+
+	// 记录当前主题状态，避免不必要的重新渲染
+	let currentTheme = null;
+	let isRendering = false; // 防止并发渲染
+	let retryCount = 0;
+	const MAX_RETRIES = 3;
+	const RETRY_DELAY = 1000; // 1秒
+
+	// 检查主题是否真的发生了变化
+	function hasThemeChanged() {
+		const isDark = document.documentElement.classList.contains("dark");
+		const newTheme = isDark ? "dark" : "default";
+
+		if (currentTheme !== newTheme) {
+			currentTheme = newTheme;
+			return true;
+		}
+		return false;
+	}
+
+	// 等待 Mermaid 库加载完成
+	function waitForMermaid(timeout = 10000) {
+		return new Promise((resolve, reject) => {
+			const startTime = Date.now();
+
+			function check() {
+				if (window.mermaid && typeof window.mermaid.initialize === "function") {
+					resolve(window.mermaid);
+				} else if (Date.now() - startTime > timeout) {
+					reject(new Error("Mermaid library failed to load within timeout"));
+				} else {
+					setTimeout(check, 100);
+				}
+			}
+
+			check();
+		});
+	}
+
+	// 设置 MutationObserver 监听 html 元素的 class 属性变化
+	function setupMutationObserver() {
+		const observer = new MutationObserver((mutations) => {
+			mutations.forEach((mutation) => {
+				if (
+					mutation.type === "attributes" &&
+					mutation.attributeName === "class"
+				) {
+					// 检查是否是 dark 类的变化
+					const target = mutation.target;
+					const wasDark = mutation.oldValue
+						? mutation.oldValue.includes("dark")
+						: false;
+					const isDark = target.classList.contains("dark");
+
+					if (wasDark !== isDark) {
+						if (hasThemeChanged()) {
+							// 延迟渲染，避免主题切换时的闪烁
+							setTimeout(() => renderMermaidDiagrams(), 150);
+						}
+					}
+				}
+			});
+		});
+
+		// 开始观察 html 元素的 class 属性变化
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["class"],
+			attributeOldValue: true,
+		});
+	}
+
+	// 缩放平移
+	function attachZoomControls(element, svgElement) {
+		if (element.__zoomAttached) return;
+		element.__zoomAttached = true;
+
+		const wrapper = document.createElement("div");
+		wrapper.className = "mermaid-zoom-wrapper";
+
+		const svgParent = svgElement.parentNode;
+		wrapper.appendChild(svgElement);
+		svgParent.appendChild(wrapper);
+
+		let scale = 1;
+		let tx = 0;
+		let ty = 0;
+		const MIN_SCALE = 0.2;
+		const MAX_SCALE = 6;
+
+		function applyTransform() {
+			wrapper.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+		}
+		const controls = document.createElement("div");
+		controls.className = "mermaid-zoom-controls";
+		controls.innerHTML = `
+			<button class="btn-regular rounded-lg h-10 w-10 active:scale-90" data-action="zoom-in" title="Zoom in">+</button>
+			<button class="btn-regular rounded-lg h-10 w-10 active:scale-90" data-action="zoom-out" title="Zoom out">−</button>
+			<button class="btn-regular rounded-lg h-10 w-10 active:scale-90" data-action="reset" title="Reset">⤾</button>
+		`;
+		element.appendChild(controls);
+
+		controls.addEventListener("click", (ev) => {
+			const action =
+				ev.target.getAttribute && ev.target.getAttribute("data-action");
+			if (!action) return;
+
+			switch (action) {
+				case "zoom-in":
+					scale = Math.min(MAX_SCALE, +(scale * 1.2).toFixed(3));
+					applyTransform();
+					break;
+				case "zoom-out":
+					scale = Math.max(MIN_SCALE, +(scale / 1.2).toFixed(3));
+					applyTransform();
+					break;
+				case "reset":
+					scale = 1;
+					tx = 0;
+					ty = 0;
+					applyTransform();
+					break;
+			}
+		});
+
+		let isPanning = false;
+		let startX = 0;
+		let startY = 0;
+		let startTx = 0;
+		let startTy = 0;
+
+		wrapper.style.touchAction = "none";
+
+		wrapper.addEventListener("pointerdown", (ev) => {
+			if (ev.button !== 0) return; // 仅左键
+			isPanning = true;
+			wrapper.setPointerCapture(ev.pointerId);
+			startX = ev.clientX;
+			startY = ev.clientY;
+			startTx = tx;
+			startTy = ty;
+		});
+
+		wrapper.addEventListener("pointermove", (ev) => {
+			if (!isPanning) return;
+			const dx = ev.clientX - startX;
+			const dy = ev.clientY - startY;
+			tx = startTx + dx / scale; // 根据当前缩放调整灵敏度
+			ty = startTy + dy / scale;
+			applyTransform();
+		});
+
+		wrapper.addEventListener("pointerup", (ev) => {
+			isPanning = false;
+			try {
+				wrapper.releasePointerCapture(ev.pointerId);
+			} catch (e) {}
+		});
+
+		wrapper.addEventListener("pointercancel", () => {
+			isPanning = false;
+		});
+
+		// 鼠标滚轮缩放
+		element.addEventListener(
+			"wheel",
+			(ev) => {
+				ev.preventDefault();
+				const delta = -ev.deltaY;
+				const zoomFactor = delta > 0 ? 1.12 : 1 / 1.12;
+				const prevScale = scale;
+				scale = Math.min(
+					MAX_SCALE,
+					Math.max(MIN_SCALE, +(scale * zoomFactor).toFixed(3)),
+				);
+
+				const rect = wrapper.getBoundingClientRect();
+				const cx = ev.clientX - rect.left;
+				const cy = ev.clientY - rect.top;
+
+				const worldX = cx / prevScale - tx;
+				const worldY = cy / prevScale - ty;
+
+				tx = cx / scale - worldX;
+				ty = cy / scale - worldY;
+
+				applyTransform();
+			},
+			{ passive: false },
+		);
+
+		// 双击重置
+		wrapper.addEventListener("dblclick", () => {
+			scale = 1;
+			tx = 0;
+			ty = 0;
+			applyTransform();
+		});
+		applyTransform();
+		let resizeTimer = null;
+		window.addEventListener("resize", () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(() => {
+				applyTransform();
+			}, 200);
+		});
+	}
+
+	// 设置其他事件监听器
+	function setupEventListeners() {
+		// 监听页面切换
+		document.addEventListener("astro:page-load", () => {
+			// 重新初始化主题状态
+			currentTheme = null;
+			retryCount = 0; // 重置重试计数
+			if (hasThemeChanged()) {
+				setTimeout(() => renderMermaidDiagrams(), 100);
+			}
+		});
+
+		// 监听页面可见性变化，页面重新可见时重新渲染
+		document.addEventListener("visibilitychange", () => {
+			if (!document.hidden) {
+				setTimeout(() => renderMermaidDiagrams(), 200);
+			}
+		});
+	}
+
+	async function initializeMermaid() {
+		try {
+			await waitForMermaid();
+
+			// 初始化 Mermaid 配置
+			window.mermaid.initialize({
+				startOnLoad: false,
+				theme: "default",
+				themeVariables: {
+					fontFamily: "inherit",
+					fontSize: "16px",
+				},
+				securityLevel: "loose",
+				// 添加错误处理配置
+				errorLevel: "warn",
+				logLevel: "error",
+			});
+
+			// 渲染所有 Mermaid 图表
+			await renderMermaidDiagrams();
+		} catch (error) {
+			console.error("Failed to initialize Mermaid:", error);
+			// 如果初始化失败，尝试重新加载
+			if (retryCount < MAX_RETRIES) {
+				retryCount++;
+				setTimeout(() => initializeMermaid(), RETRY_DELAY * retryCount);
+			}
+		}
+	}
+
+	async function renderMermaidDiagrams() {
+		// 防止并发渲染
+		if (isRendering) {
+			return;
+		}
+
+		// 检查 Mermaid 是否可用
+		if (!window.mermaid || typeof window.mermaid.render !== "function") {
+			console.warn("Mermaid not available, skipping render");
+			return;
+		}
+
+		isRendering = true;
+
+		try {
+			const mermaidElements = document.querySelectorAll(
+				".mermaid[data-mermaid-code]",
+			);
+
+			if (mermaidElements.length === 0) {
+				isRendering = false;
+				return;
+			}
+
+			// 延迟检测主题，确保 DOM 已经更新
+			await new Promise((resolve) => setTimeout(resolve, 100));
+
+			const htmlElement = document.documentElement;
+			const isDark = htmlElement.classList.contains("dark");
+			const theme = isDark ? "dark" : "default";
+
+			// 更新 Mermaid 主题（只需要更新一次）
+			window.mermaid.initialize({
+				startOnLoad: false,
+				theme: theme,
+				themeVariables: {
+					fontFamily: "inherit",
+					fontSize: "16px",
+					// 强制应用主题变量
+					primaryColor: isDark ? "#ffffff" : "#000000",
+					primaryTextColor: isDark ? "#ffffff" : "#000000",
+					primaryBorderColor: isDark ? "#ffffff" : "#000000",
+					lineColor: isDark ? "#ffffff" : "#000000",
+					secondaryColor: isDark ? "#333333" : "#f0f0f0",
+					tertiaryColor: isDark ? "#555555" : "#e0e0e0",
+				},
+				securityLevel: "loose",
+				errorLevel: "warn",
+				logLevel: "error",
+			});
+
+			// 批量渲染所有图表，添加重试机制
+			const renderPromises = Array.from(mermaidElements).map(
+				async (element, index) => {
+					let attempts = 0;
+					const maxAttempts = 3;
+
+					while (attempts < maxAttempts) {
+						try {
+							const code = element.getAttribute("data-mermaid-code");
+
+							if (!code) {
+								break;
+							}
+
+							// 显示加载状态
+							element.innerHTML =
+								'<div class="mermaid-loading">Rendering diagram...</div>';
+
+							// 渲染图表
+							const { svg } = await window.mermaid.render(
+								`mermaid-${Date.now()}-${index}-${attempts}`,
+								code,
+							);
+
+							const parser = new DOMParser();
+							const doc = parser.parseFromString(svg, "image/svg+xml");
+							const svgElement = doc.documentElement;
+
+							element.innerHTML = "";
+							element.__zoomAttached = false;
+							element.appendChild(svgElement);
+
+							// 添加响应式支持
+							const insertedSvg = element.querySelector("svg");
+							if (insertedSvg) {
+								insertedSvg.setAttribute("width", "100%");
+								insertedSvg.removeAttribute("height");
+								insertedSvg.style.maxWidth = "100%";
+								insertedSvg.style.height = "auto";
+								//Todo 需要根据实际情况
+								insertedSvg.style.minHeight = "300px";
+
+								// 强制应用样式
+								if (isDark) {
+									svgElement.style.filter = "brightness(0.9) contrast(1.1)";
+								} else {
+									svgElement.style.filter = "none";
+								}
+								attachZoomControls(element, insertedSvg);
+							}
+
+							// 渲染成功，跳出重试循环
+							break;
+						} catch (error) {
+							attempts++;
+							console.warn(
+								`Mermaid rendering attempt ${attempts} failed for element ${index}:`,
+								error,
+							);
+
+							if (attempts >= maxAttempts) {
+								console.error(
+									`Failed to render Mermaid diagram after ${maxAttempts} attempts:`,
+									error,
+								);
+								element.innerHTML = `
+									<div class="mermaid-error">
+										<p>Failed to render diagram after ${maxAttempts} attempts.</p>
+										<button onclick="location.reload()" style="margin-top: 8px; padding: 4px 8px; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer;">
+											Retry Page
+										</button>
+									</div>
+								`;
+							} else {
+								// 等待一段时间后重试
+								await new Promise((resolve) =>
+									setTimeout(resolve, 500 * attempts),
+								);
+							}
+						}
+					}
+				},
+			);
+
+			// 等待所有渲染完成
+			await Promise.all(renderPromises);
+			retryCount = 0; // 重置重试计数
+		} catch (error) {
+			console.error("Error in renderMermaidDiagrams:", error);
+
+			// 如果渲染失败，尝试重新渲染
+			if (retryCount < MAX_RETRIES) {
+				retryCount++;
+				setTimeout(() => renderMermaidDiagrams(), RETRY_DELAY * retryCount);
+			}
+		} finally {
+			isRendering = false;
+		}
+	}
+
+	// 初始化主题状态
+	function initializeThemeState() {
+		const isDark = document.documentElement.classList.contains("dark");
+		currentTheme = isDark ? "dark" : "default";
+	}
+
+	// 加载 Mermaid 库
+	async function loadMermaid() {
+		if (typeof window.mermaid !== "undefined") {
+			return Promise.resolve();
+		}
+
+		return new Promise((resolve, reject) => {
+			const script = document.createElement("script");
+			script.src =
+				"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
+
+			script.onload = () => {
+				console.log("Mermaid library loaded successfully");
+				resolve();
+			};
+
+			script.onerror = (error) => {
+				console.error("Failed to load Mermaid library:", error);
+				// 尝试备用 CDN
+				const fallbackScript = document.createElement("script");
+				fallbackScript.src = "https://unpkg.com/mermaid@11/dist/mermaid.min.js";
+
+				fallbackScript.onload = () => {
+					console.log("Mermaid library loaded from fallback CDN");
+					resolve();
+				};
+
+				fallbackScript.onerror = () => {
+					reject(
+						new Error(
+							"Failed to load Mermaid from both primary and fallback CDNs",
+						),
+					);
+				};
+
+				document.head.appendChild(fallbackScript);
+			};
+
+			document.head.appendChild(script);
+		});
+	}
+
+	// 主初始化函数
+	async function initialize() {
+		try {
+			// 设置监听器
+			setupMutationObserver();
+			setupEventListeners();
+
+			// 初始化主题状态
+			initializeThemeState();
+
+			// 加载并初始化 Mermaid
+			await loadMermaid();
+			await initializeMermaid();
+		} catch (error) {
+			console.error("Failed to initialize Mermaid system:", error);
+		}
+	}
+
+	// 启动初始化
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initialize);
+	} else {
+		initialize();
+	}
+})();
+</script></div><p>关键文件：<code>vbmeta.img</code> 存储所有以上受保护分区的哈希树、公钥和签名
+验证失败：触发 <code>verifiedbootstate=red</code>，等死吧</p><blockquote class="admonition bdm-note"><span class="bdm-title"><div>verifiedbootstate btw</div></span><p>green：官方签名，完整信任链 -> 释放 FBE 密钥 / KDK</p><p>orange：用户解锁 bl -> 销毁 KDK，仅允许基础功能</p><p>red：监测到篡改 -> 永久禁用安全服务（包括 Widevine L1 密钥），机都别想开</p></blockquote><p>AVB 根本就他吗不关心你能不能用 TEE 密钥，要么绿要么橘要么红，红灯直接死，就算绿灯也不代表你设备安全</p></section><section><h3 id="avb-与-tee-的致命关联">AVB 与 TEE 的致命关联<a class="anchor" href="#avb-与-tee-的致命关联"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>TEE（如 [[#^Keymaster TA]]）在初始化时会读取内核参数 <code>androidboot.verifiedbootstate</code></p><hr></section></section>
+<section><h2 id="tee已炸毁和他的动物朋友们">TEE（已炸毁）和他的动物朋友们<a class="anchor" href="#tee已炸毁和他的动物朋友们"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="核心概念">核心概念<a class="anchor" href="#核心概念"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>TEE（Trust Execution Environment 可信执行环境），是 SoC 中独立于系统的硬件级安全隔离环境（如 ARM Trust Zone）。
+保护：指纹支付，DRM 高清内容解密（如 Netflix），存储加密密钥。即便设备被 root 也无法读取 TEE 数据。</p><p>Root 会破坏 TEE 的完整性。
+获取 Root 权限需解锁 Bootloader（触发 [[#^AVB 2.0]] 验证失败），导致：</p><ul>
+<li>Verified Boot 失败：系统分区被修改，TEE 监测到非官方签名，拒绝提供安全服务（如指纹支付）</li>
+<li>密钥吊销：部分厂商（如三星）在检测到 root 后永久熔断 e-fuse，使 TEE 拒绝生成新密钥
+影响：
+支付宝 / 微信指纹支付，银行 app，DRM L1 视频播放（如 4K Netflix）通常失效，根源在于 TEE 拒绝向被篡改的系统提供高密钥。</li>
+</ul></section><section><h3 id="指纹支付依赖-tee">指纹支付依赖 TEE<a class="anchor" href="#指纹支付依赖-tee"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><div class="mermaid-diagram-container"><div class="mermaid-wrapper" id="mermaid-q6nfgv"><div class="mermaid" data-mermaid-code="graph LR
+A[用户按压指纹] --> B(TEE 验证生物特性) 
+B --> C{TEE 生成临时密钥} 
+C --> D[加密支付指令] 
+D --> E[安全传输至服务器]">graph LR
+A[用户按压指纹] --> B(TEE 验证生物特性) 
+B --> C{TEE 生成临时密钥} 
+C --> D[加密支付指令] 
+D --> E[安全传输至服务器]</div></div><script type="text/javascript">(() => {
+	// 单例模式：检查是否已经初始化过
+	if (window.mermaidInitialized) {
+		return;
+	}
+
+	window.mermaidInitialized = true;
+
+	// 记录当前主题状态，避免不必要的重新渲染
+	let currentTheme = null;
+	let isRendering = false; // 防止并发渲染
+	let retryCount = 0;
+	const MAX_RETRIES = 3;
+	const RETRY_DELAY = 1000; // 1秒
+
+	// 检查主题是否真的发生了变化
+	function hasThemeChanged() {
+		const isDark = document.documentElement.classList.contains("dark");
+		const newTheme = isDark ? "dark" : "default";
+
+		if (currentTheme !== newTheme) {
+			currentTheme = newTheme;
+			return true;
+		}
+		return false;
+	}
+
+	// 等待 Mermaid 库加载完成
+	function waitForMermaid(timeout = 10000) {
+		return new Promise((resolve, reject) => {
+			const startTime = Date.now();
+
+			function check() {
+				if (window.mermaid && typeof window.mermaid.initialize === "function") {
+					resolve(window.mermaid);
+				} else if (Date.now() - startTime > timeout) {
+					reject(new Error("Mermaid library failed to load within timeout"));
+				} else {
+					setTimeout(check, 100);
+				}
+			}
+
+			check();
+		});
+	}
+
+	// 设置 MutationObserver 监听 html 元素的 class 属性变化
+	function setupMutationObserver() {
+		const observer = new MutationObserver((mutations) => {
+			mutations.forEach((mutation) => {
+				if (
+					mutation.type === "attributes" &&
+					mutation.attributeName === "class"
+				) {
+					// 检查是否是 dark 类的变化
+					const target = mutation.target;
+					const wasDark = mutation.oldValue
+						? mutation.oldValue.includes("dark")
+						: false;
+					const isDark = target.classList.contains("dark");
+
+					if (wasDark !== isDark) {
+						if (hasThemeChanged()) {
+							// 延迟渲染，避免主题切换时的闪烁
+							setTimeout(() => renderMermaidDiagrams(), 150);
+						}
+					}
+				}
+			});
+		});
+
+		// 开始观察 html 元素的 class 属性变化
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["class"],
+			attributeOldValue: true,
+		});
+	}
+
+	// 缩放平移
+	function attachZoomControls(element, svgElement) {
+		if (element.__zoomAttached) return;
+		element.__zoomAttached = true;
+
+		const wrapper = document.createElement("div");
+		wrapper.className = "mermaid-zoom-wrapper";
+
+		const svgParent = svgElement.parentNode;
+		wrapper.appendChild(svgElement);
+		svgParent.appendChild(wrapper);
+
+		let scale = 1;
+		let tx = 0;
+		let ty = 0;
+		const MIN_SCALE = 0.2;
+		const MAX_SCALE = 6;
+
+		function applyTransform() {
+			wrapper.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+		}
+		const controls = document.createElement("div");
+		controls.className = "mermaid-zoom-controls";
+		controls.innerHTML = `
+			<button class="btn-regular rounded-lg h-10 w-10 active:scale-90" data-action="zoom-in" title="Zoom in">+</button>
+			<button class="btn-regular rounded-lg h-10 w-10 active:scale-90" data-action="zoom-out" title="Zoom out">−</button>
+			<button class="btn-regular rounded-lg h-10 w-10 active:scale-90" data-action="reset" title="Reset">⤾</button>
+		`;
+		element.appendChild(controls);
+
+		controls.addEventListener("click", (ev) => {
+			const action =
+				ev.target.getAttribute && ev.target.getAttribute("data-action");
+			if (!action) return;
+
+			switch (action) {
+				case "zoom-in":
+					scale = Math.min(MAX_SCALE, +(scale * 1.2).toFixed(3));
+					applyTransform();
+					break;
+				case "zoom-out":
+					scale = Math.max(MIN_SCALE, +(scale / 1.2).toFixed(3));
+					applyTransform();
+					break;
+				case "reset":
+					scale = 1;
+					tx = 0;
+					ty = 0;
+					applyTransform();
+					break;
+			}
+		});
+
+		let isPanning = false;
+		let startX = 0;
+		let startY = 0;
+		let startTx = 0;
+		let startTy = 0;
+
+		wrapper.style.touchAction = "none";
+
+		wrapper.addEventListener("pointerdown", (ev) => {
+			if (ev.button !== 0) return; // 仅左键
+			isPanning = true;
+			wrapper.setPointerCapture(ev.pointerId);
+			startX = ev.clientX;
+			startY = ev.clientY;
+			startTx = tx;
+			startTy = ty;
+		});
+
+		wrapper.addEventListener("pointermove", (ev) => {
+			if (!isPanning) return;
+			const dx = ev.clientX - startX;
+			const dy = ev.clientY - startY;
+			tx = startTx + dx / scale; // 根据当前缩放调整灵敏度
+			ty = startTy + dy / scale;
+			applyTransform();
+		});
+
+		wrapper.addEventListener("pointerup", (ev) => {
+			isPanning = false;
+			try {
+				wrapper.releasePointerCapture(ev.pointerId);
+			} catch (e) {}
+		});
+
+		wrapper.addEventListener("pointercancel", () => {
+			isPanning = false;
+		});
+
+		// 鼠标滚轮缩放
+		element.addEventListener(
+			"wheel",
+			(ev) => {
+				ev.preventDefault();
+				const delta = -ev.deltaY;
+				const zoomFactor = delta > 0 ? 1.12 : 1 / 1.12;
+				const prevScale = scale;
+				scale = Math.min(
+					MAX_SCALE,
+					Math.max(MIN_SCALE, +(scale * zoomFactor).toFixed(3)),
+				);
+
+				const rect = wrapper.getBoundingClientRect();
+				const cx = ev.clientX - rect.left;
+				const cy = ev.clientY - rect.top;
+
+				const worldX = cx / prevScale - tx;
+				const worldY = cy / prevScale - ty;
+
+				tx = cx / scale - worldX;
+				ty = cy / scale - worldY;
+
+				applyTransform();
+			},
+			{ passive: false },
+		);
+
+		// 双击重置
+		wrapper.addEventListener("dblclick", () => {
+			scale = 1;
+			tx = 0;
+			ty = 0;
+			applyTransform();
+		});
+		applyTransform();
+		let resizeTimer = null;
+		window.addEventListener("resize", () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(() => {
+				applyTransform();
+			}, 200);
+		});
+	}
+
+	// 设置其他事件监听器
+	function setupEventListeners() {
+		// 监听页面切换
+		document.addEventListener("astro:page-load", () => {
+			// 重新初始化主题状态
+			currentTheme = null;
+			retryCount = 0; // 重置重试计数
+			if (hasThemeChanged()) {
+				setTimeout(() => renderMermaidDiagrams(), 100);
+			}
+		});
+
+		// 监听页面可见性变化，页面重新可见时重新渲染
+		document.addEventListener("visibilitychange", () => {
+			if (!document.hidden) {
+				setTimeout(() => renderMermaidDiagrams(), 200);
+			}
+		});
+	}
+
+	async function initializeMermaid() {
+		try {
+			await waitForMermaid();
+
+			// 初始化 Mermaid 配置
+			window.mermaid.initialize({
+				startOnLoad: false,
+				theme: "default",
+				themeVariables: {
+					fontFamily: "inherit",
+					fontSize: "16px",
+				},
+				securityLevel: "loose",
+				// 添加错误处理配置
+				errorLevel: "warn",
+				logLevel: "error",
+			});
+
+			// 渲染所有 Mermaid 图表
+			await renderMermaidDiagrams();
+		} catch (error) {
+			console.error("Failed to initialize Mermaid:", error);
+			// 如果初始化失败，尝试重新加载
+			if (retryCount < MAX_RETRIES) {
+				retryCount++;
+				setTimeout(() => initializeMermaid(), RETRY_DELAY * retryCount);
+			}
+		}
+	}
+
+	async function renderMermaidDiagrams() {
+		// 防止并发渲染
+		if (isRendering) {
+			return;
+		}
+
+		// 检查 Mermaid 是否可用
+		if (!window.mermaid || typeof window.mermaid.render !== "function") {
+			console.warn("Mermaid not available, skipping render");
+			return;
+		}
+
+		isRendering = true;
+
+		try {
+			const mermaidElements = document.querySelectorAll(
+				".mermaid[data-mermaid-code]",
+			);
+
+			if (mermaidElements.length === 0) {
+				isRendering = false;
+				return;
+			}
+
+			// 延迟检测主题，确保 DOM 已经更新
+			await new Promise((resolve) => setTimeout(resolve, 100));
+
+			const htmlElement = document.documentElement;
+			const isDark = htmlElement.classList.contains("dark");
+			const theme = isDark ? "dark" : "default";
+
+			// 更新 Mermaid 主题（只需要更新一次）
+			window.mermaid.initialize({
+				startOnLoad: false,
+				theme: theme,
+				themeVariables: {
+					fontFamily: "inherit",
+					fontSize: "16px",
+					// 强制应用主题变量
+					primaryColor: isDark ? "#ffffff" : "#000000",
+					primaryTextColor: isDark ? "#ffffff" : "#000000",
+					primaryBorderColor: isDark ? "#ffffff" : "#000000",
+					lineColor: isDark ? "#ffffff" : "#000000",
+					secondaryColor: isDark ? "#333333" : "#f0f0f0",
+					tertiaryColor: isDark ? "#555555" : "#e0e0e0",
+				},
+				securityLevel: "loose",
+				errorLevel: "warn",
+				logLevel: "error",
+			});
+
+			// 批量渲染所有图表，添加重试机制
+			const renderPromises = Array.from(mermaidElements).map(
+				async (element, index) => {
+					let attempts = 0;
+					const maxAttempts = 3;
+
+					while (attempts < maxAttempts) {
+						try {
+							const code = element.getAttribute("data-mermaid-code");
+
+							if (!code) {
+								break;
+							}
+
+							// 显示加载状态
+							element.innerHTML =
+								'<div class="mermaid-loading">Rendering diagram...</div>';
+
+							// 渲染图表
+							const { svg } = await window.mermaid.render(
+								`mermaid-${Date.now()}-${index}-${attempts}`,
+								code,
+							);
+
+							const parser = new DOMParser();
+							const doc = parser.parseFromString(svg, "image/svg+xml");
+							const svgElement = doc.documentElement;
+
+							element.innerHTML = "";
+							element.__zoomAttached = false;
+							element.appendChild(svgElement);
+
+							// 添加响应式支持
+							const insertedSvg = element.querySelector("svg");
+							if (insertedSvg) {
+								insertedSvg.setAttribute("width", "100%");
+								insertedSvg.removeAttribute("height");
+								insertedSvg.style.maxWidth = "100%";
+								insertedSvg.style.height = "auto";
+								//Todo 需要根据实际情况
+								insertedSvg.style.minHeight = "300px";
+
+								// 强制应用样式
+								if (isDark) {
+									svgElement.style.filter = "brightness(0.9) contrast(1.1)";
+								} else {
+									svgElement.style.filter = "none";
+								}
+								attachZoomControls(element, insertedSvg);
+							}
+
+							// 渲染成功，跳出重试循环
+							break;
+						} catch (error) {
+							attempts++;
+							console.warn(
+								`Mermaid rendering attempt ${attempts} failed for element ${index}:`,
+								error,
+							);
+
+							if (attempts >= maxAttempts) {
+								console.error(
+									`Failed to render Mermaid diagram after ${maxAttempts} attempts:`,
+									error,
+								);
+								element.innerHTML = `
+									<div class="mermaid-error">
+										<p>Failed to render diagram after ${maxAttempts} attempts.</p>
+										<button onclick="location.reload()" style="margin-top: 8px; padding: 4px 8px; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer;">
+											Retry Page
+										</button>
+									</div>
+								`;
+							} else {
+								// 等待一段时间后重试
+								await new Promise((resolve) =>
+									setTimeout(resolve, 500 * attempts),
+								);
+							}
+						}
+					}
+				},
+			);
+
+			// 等待所有渲染完成
+			await Promise.all(renderPromises);
+			retryCount = 0; // 重置重试计数
+		} catch (error) {
+			console.error("Error in renderMermaidDiagrams:", error);
+
+			// 如果渲染失败，尝试重新渲染
+			if (retryCount < MAX_RETRIES) {
+				retryCount++;
+				setTimeout(() => renderMermaidDiagrams(), RETRY_DELAY * retryCount);
+			}
+		} finally {
+			isRendering = false;
+		}
+	}
+
+	// 初始化主题状态
+	function initializeThemeState() {
+		const isDark = document.documentElement.classList.contains("dark");
+		currentTheme = isDark ? "dark" : "default";
+	}
+
+	// 加载 Mermaid 库
+	async function loadMermaid() {
+		if (typeof window.mermaid !== "undefined") {
+			return Promise.resolve();
+		}
+
+		return new Promise((resolve, reject) => {
+			const script = document.createElement("script");
+			script.src =
+				"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
+
+			script.onload = () => {
+				console.log("Mermaid library loaded successfully");
+				resolve();
+			};
+
+			script.onerror = (error) => {
+				console.error("Failed to load Mermaid library:", error);
+				// 尝试备用 CDN
+				const fallbackScript = document.createElement("script");
+				fallbackScript.src = "https://unpkg.com/mermaid@11/dist/mermaid.min.js";
+
+				fallbackScript.onload = () => {
+					console.log("Mermaid library loaded from fallback CDN");
+					resolve();
+				};
+
+				fallbackScript.onerror = () => {
+					reject(
+						new Error(
+							"Failed to load Mermaid from both primary and fallback CDNs",
+						),
+					);
+				};
+
+				document.head.appendChild(fallbackScript);
+			};
+
+			document.head.appendChild(script);
+		});
+	}
+
+	// 主初始化函数
+	async function initialize() {
+		try {
+			// 设置监听器
+			setupMutationObserver();
+			setupEventListeners();
+
+			// 初始化主题状态
+			initializeThemeState();
+
+			// 加载并初始化 Mermaid
+			await loadMermaid();
+			await initializeMermaid();
+		} catch (error) {
+			console.error("Failed to initialize Mermaid system:", error);
+		}
+	}
+
+	// 启动初始化
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initialize);
+	} else {
+		initialize();
+	}
+})();
+</script></div><p>绕过尝试：伪装认证状态但无法恢复 TEE 内部数据</p></section><section><h3 id="data-分区加密依赖-tee">data 分区加密依赖 TEE<a class="anchor" href="#data-分区加密依赖-tee"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>FBE（File-Based-Encryption）的密钥由 TEE 保护。FBE 专门用于加密 <code>/data</code> 分区。FBE 并非全盘加密，不加密 <code>/system</code>、<code>/vendor</code> 等系统分区（这些分区通过 [[#^AVB 2.0]] 校验完整性，但不加密）
+FBE 采用分层密钥结构，人话就是锁屏密码不直接作为加密密钥，而是作为密钥派生凭证</p><div class="mermaid-diagram-container"><div class="mermaid-wrapper" id="mermaid-ewhxuu"><div class="mermaid" data-mermaid-code="graph LR
+  A[锁屏密码] --> B(Tee 内部执行 KDF)
+  B --> C[生成 KDK<br/>Key Derivation Key]
+  C --> D[加密 UserKey<br/>存储在 /data/vold/]
+  D --> E[UserKey 解密 DEK<br/>Device Encryption Key]
+  E --> F[DEK 直接加密文件]">graph LR
+  A[锁屏密码] --> B(Tee 内部执行 KDF)
+  B --> C[生成 KDK&#x3C;br/>Key Derivation Key]
+  C --> D[加密 UserKey&#x3C;br/>存储在 /data/vold/]
+  D --> E[UserKey 解密 DEK&#x3C;br/>Device Encryption Key]
+  E --> F[DEK 直接加密文件]</div></div><script type="text/javascript">(() => {
+	// 单例模式：检查是否已经初始化过
+	if (window.mermaidInitialized) {
+		return;
+	}
+
+	window.mermaidInitialized = true;
+
+	// 记录当前主题状态，避免不必要的重新渲染
+	let currentTheme = null;
+	let isRendering = false; // 防止并发渲染
+	let retryCount = 0;
+	const MAX_RETRIES = 3;
+	const RETRY_DELAY = 1000; // 1秒
+
+	// 检查主题是否真的发生了变化
+	function hasThemeChanged() {
+		const isDark = document.documentElement.classList.contains("dark");
+		const newTheme = isDark ? "dark" : "default";
+
+		if (currentTheme !== newTheme) {
+			currentTheme = newTheme;
+			return true;
+		}
+		return false;
+	}
+
+	// 等待 Mermaid 库加载完成
+	function waitForMermaid(timeout = 10000) {
+		return new Promise((resolve, reject) => {
+			const startTime = Date.now();
+
+			function check() {
+				if (window.mermaid && typeof window.mermaid.initialize === "function") {
+					resolve(window.mermaid);
+				} else if (Date.now() - startTime > timeout) {
+					reject(new Error("Mermaid library failed to load within timeout"));
+				} else {
+					setTimeout(check, 100);
+				}
+			}
+
+			check();
+		});
+	}
+
+	// 设置 MutationObserver 监听 html 元素的 class 属性变化
+	function setupMutationObserver() {
+		const observer = new MutationObserver((mutations) => {
+			mutations.forEach((mutation) => {
+				if (
+					mutation.type === "attributes" &&
+					mutation.attributeName === "class"
+				) {
+					// 检查是否是 dark 类的变化
+					const target = mutation.target;
+					const wasDark = mutation.oldValue
+						? mutation.oldValue.includes("dark")
+						: false;
+					const isDark = target.classList.contains("dark");
+
+					if (wasDark !== isDark) {
+						if (hasThemeChanged()) {
+							// 延迟渲染，避免主题切换时的闪烁
+							setTimeout(() => renderMermaidDiagrams(), 150);
+						}
+					}
+				}
+			});
+		});
+
+		// 开始观察 html 元素的 class 属性变化
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["class"],
+			attributeOldValue: true,
+		});
+	}
+
+	// 缩放平移
+	function attachZoomControls(element, svgElement) {
+		if (element.__zoomAttached) return;
+		element.__zoomAttached = true;
+
+		const wrapper = document.createElement("div");
+		wrapper.className = "mermaid-zoom-wrapper";
+
+		const svgParent = svgElement.parentNode;
+		wrapper.appendChild(svgElement);
+		svgParent.appendChild(wrapper);
+
+		let scale = 1;
+		let tx = 0;
+		let ty = 0;
+		const MIN_SCALE = 0.2;
+		const MAX_SCALE = 6;
+
+		function applyTransform() {
+			wrapper.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+		}
+		const controls = document.createElement("div");
+		controls.className = "mermaid-zoom-controls";
+		controls.innerHTML = `
+			<button class="btn-regular rounded-lg h-10 w-10 active:scale-90" data-action="zoom-in" title="Zoom in">+</button>
+			<button class="btn-regular rounded-lg h-10 w-10 active:scale-90" data-action="zoom-out" title="Zoom out">−</button>
+			<button class="btn-regular rounded-lg h-10 w-10 active:scale-90" data-action="reset" title="Reset">⤾</button>
+		`;
+		element.appendChild(controls);
+
+		controls.addEventListener("click", (ev) => {
+			const action =
+				ev.target.getAttribute && ev.target.getAttribute("data-action");
+			if (!action) return;
+
+			switch (action) {
+				case "zoom-in":
+					scale = Math.min(MAX_SCALE, +(scale * 1.2).toFixed(3));
+					applyTransform();
+					break;
+				case "zoom-out":
+					scale = Math.max(MIN_SCALE, +(scale / 1.2).toFixed(3));
+					applyTransform();
+					break;
+				case "reset":
+					scale = 1;
+					tx = 0;
+					ty = 0;
+					applyTransform();
+					break;
+			}
+		});
+
+		let isPanning = false;
+		let startX = 0;
+		let startY = 0;
+		let startTx = 0;
+		let startTy = 0;
+
+		wrapper.style.touchAction = "none";
+
+		wrapper.addEventListener("pointerdown", (ev) => {
+			if (ev.button !== 0) return; // 仅左键
+			isPanning = true;
+			wrapper.setPointerCapture(ev.pointerId);
+			startX = ev.clientX;
+			startY = ev.clientY;
+			startTx = tx;
+			startTy = ty;
+		});
+
+		wrapper.addEventListener("pointermove", (ev) => {
+			if (!isPanning) return;
+			const dx = ev.clientX - startX;
+			const dy = ev.clientY - startY;
+			tx = startTx + dx / scale; // 根据当前缩放调整灵敏度
+			ty = startTy + dy / scale;
+			applyTransform();
+		});
+
+		wrapper.addEventListener("pointerup", (ev) => {
+			isPanning = false;
+			try {
+				wrapper.releasePointerCapture(ev.pointerId);
+			} catch (e) {}
+		});
+
+		wrapper.addEventListener("pointercancel", () => {
+			isPanning = false;
+		});
+
+		// 鼠标滚轮缩放
+		element.addEventListener(
+			"wheel",
+			(ev) => {
+				ev.preventDefault();
+				const delta = -ev.deltaY;
+				const zoomFactor = delta > 0 ? 1.12 : 1 / 1.12;
+				const prevScale = scale;
+				scale = Math.min(
+					MAX_SCALE,
+					Math.max(MIN_SCALE, +(scale * zoomFactor).toFixed(3)),
+				);
+
+				const rect = wrapper.getBoundingClientRect();
+				const cx = ev.clientX - rect.left;
+				const cy = ev.clientY - rect.top;
+
+				const worldX = cx / prevScale - tx;
+				const worldY = cy / prevScale - ty;
+
+				tx = cx / scale - worldX;
+				ty = cy / scale - worldY;
+
+				applyTransform();
+			},
+			{ passive: false },
+		);
+
+		// 双击重置
+		wrapper.addEventListener("dblclick", () => {
+			scale = 1;
+			tx = 0;
+			ty = 0;
+			applyTransform();
+		});
+		applyTransform();
+		let resizeTimer = null;
+		window.addEventListener("resize", () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(() => {
+				applyTransform();
+			}, 200);
+		});
+	}
+
+	// 设置其他事件监听器
+	function setupEventListeners() {
+		// 监听页面切换
+		document.addEventListener("astro:page-load", () => {
+			// 重新初始化主题状态
+			currentTheme = null;
+			retryCount = 0; // 重置重试计数
+			if (hasThemeChanged()) {
+				setTimeout(() => renderMermaidDiagrams(), 100);
+			}
+		});
+
+		// 监听页面可见性变化，页面重新可见时重新渲染
+		document.addEventListener("visibilitychange", () => {
+			if (!document.hidden) {
+				setTimeout(() => renderMermaidDiagrams(), 200);
+			}
+		});
+	}
+
+	async function initializeMermaid() {
+		try {
+			await waitForMermaid();
+
+			// 初始化 Mermaid 配置
+			window.mermaid.initialize({
+				startOnLoad: false,
+				theme: "default",
+				themeVariables: {
+					fontFamily: "inherit",
+					fontSize: "16px",
+				},
+				securityLevel: "loose",
+				// 添加错误处理配置
+				errorLevel: "warn",
+				logLevel: "error",
+			});
+
+			// 渲染所有 Mermaid 图表
+			await renderMermaidDiagrams();
+		} catch (error) {
+			console.error("Failed to initialize Mermaid:", error);
+			// 如果初始化失败，尝试重新加载
+			if (retryCount < MAX_RETRIES) {
+				retryCount++;
+				setTimeout(() => initializeMermaid(), RETRY_DELAY * retryCount);
+			}
+		}
+	}
+
+	async function renderMermaidDiagrams() {
+		// 防止并发渲染
+		if (isRendering) {
+			return;
+		}
+
+		// 检查 Mermaid 是否可用
+		if (!window.mermaid || typeof window.mermaid.render !== "function") {
+			console.warn("Mermaid not available, skipping render");
+			return;
+		}
+
+		isRendering = true;
+
+		try {
+			const mermaidElements = document.querySelectorAll(
+				".mermaid[data-mermaid-code]",
+			);
+
+			if (mermaidElements.length === 0) {
+				isRendering = false;
+				return;
+			}
+
+			// 延迟检测主题，确保 DOM 已经更新
+			await new Promise((resolve) => setTimeout(resolve, 100));
+
+			const htmlElement = document.documentElement;
+			const isDark = htmlElement.classList.contains("dark");
+			const theme = isDark ? "dark" : "default";
+
+			// 更新 Mermaid 主题（只需要更新一次）
+			window.mermaid.initialize({
+				startOnLoad: false,
+				theme: theme,
+				themeVariables: {
+					fontFamily: "inherit",
+					fontSize: "16px",
+					// 强制应用主题变量
+					primaryColor: isDark ? "#ffffff" : "#000000",
+					primaryTextColor: isDark ? "#ffffff" : "#000000",
+					primaryBorderColor: isDark ? "#ffffff" : "#000000",
+					lineColor: isDark ? "#ffffff" : "#000000",
+					secondaryColor: isDark ? "#333333" : "#f0f0f0",
+					tertiaryColor: isDark ? "#555555" : "#e0e0e0",
+				},
+				securityLevel: "loose",
+				errorLevel: "warn",
+				logLevel: "error",
+			});
+
+			// 批量渲染所有图表，添加重试机制
+			const renderPromises = Array.from(mermaidElements).map(
+				async (element, index) => {
+					let attempts = 0;
+					const maxAttempts = 3;
+
+					while (attempts < maxAttempts) {
+						try {
+							const code = element.getAttribute("data-mermaid-code");
+
+							if (!code) {
+								break;
+							}
+
+							// 显示加载状态
+							element.innerHTML =
+								'<div class="mermaid-loading">Rendering diagram...</div>';
+
+							// 渲染图表
+							const { svg } = await window.mermaid.render(
+								`mermaid-${Date.now()}-${index}-${attempts}`,
+								code,
+							);
+
+							const parser = new DOMParser();
+							const doc = parser.parseFromString(svg, "image/svg+xml");
+							const svgElement = doc.documentElement;
+
+							element.innerHTML = "";
+							element.__zoomAttached = false;
+							element.appendChild(svgElement);
+
+							// 添加响应式支持
+							const insertedSvg = element.querySelector("svg");
+							if (insertedSvg) {
+								insertedSvg.setAttribute("width", "100%");
+								insertedSvg.removeAttribute("height");
+								insertedSvg.style.maxWidth = "100%";
+								insertedSvg.style.height = "auto";
+								//Todo 需要根据实际情况
+								insertedSvg.style.minHeight = "300px";
+
+								// 强制应用样式
+								if (isDark) {
+									svgElement.style.filter = "brightness(0.9) contrast(1.1)";
+								} else {
+									svgElement.style.filter = "none";
+								}
+								attachZoomControls(element, insertedSvg);
+							}
+
+							// 渲染成功，跳出重试循环
+							break;
+						} catch (error) {
+							attempts++;
+							console.warn(
+								`Mermaid rendering attempt ${attempts} failed for element ${index}:`,
+								error,
+							);
+
+							if (attempts >= maxAttempts) {
+								console.error(
+									`Failed to render Mermaid diagram after ${maxAttempts} attempts:`,
+									error,
+								);
+								element.innerHTML = `
+									<div class="mermaid-error">
+										<p>Failed to render diagram after ${maxAttempts} attempts.</p>
+										<button onclick="location.reload()" style="margin-top: 8px; padding: 4px 8px; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer;">
+											Retry Page
+										</button>
+									</div>
+								`;
+							} else {
+								// 等待一段时间后重试
+								await new Promise((resolve) =>
+									setTimeout(resolve, 500 * attempts),
+								);
+							}
+						}
+					}
+				},
+			);
+
+			// 等待所有渲染完成
+			await Promise.all(renderPromises);
+			retryCount = 0; // 重置重试计数
+		} catch (error) {
+			console.error("Error in renderMermaidDiagrams:", error);
+
+			// 如果渲染失败，尝试重新渲染
+			if (retryCount < MAX_RETRIES) {
+				retryCount++;
+				setTimeout(() => renderMermaidDiagrams(), RETRY_DELAY * retryCount);
+			}
+		} finally {
+			isRendering = false;
+		}
+	}
+
+	// 初始化主题状态
+	function initializeThemeState() {
+		const isDark = document.documentElement.classList.contains("dark");
+		currentTheme = isDark ? "dark" : "default";
+	}
+
+	// 加载 Mermaid 库
+	async function loadMermaid() {
+		if (typeof window.mermaid !== "undefined") {
+			return Promise.resolve();
+		}
+
+		return new Promise((resolve, reject) => {
+			const script = document.createElement("script");
+			script.src =
+				"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
+
+			script.onload = () => {
+				console.log("Mermaid library loaded successfully");
+				resolve();
+			};
+
+			script.onerror = (error) => {
+				console.error("Failed to load Mermaid library:", error);
+				// 尝试备用 CDN
+				const fallbackScript = document.createElement("script");
+				fallbackScript.src = "https://unpkg.com/mermaid@11/dist/mermaid.min.js";
+
+				fallbackScript.onload = () => {
+					console.log("Mermaid library loaded from fallback CDN");
+					resolve();
+				};
+
+				fallbackScript.onerror = () => {
+					reject(
+						new Error(
+							"Failed to load Mermaid from both primary and fallback CDNs",
+						),
+					);
+				};
+
+				document.head.appendChild(fallbackScript);
+			};
+
+			document.head.appendChild(script);
+		});
+	}
+
+	// 主初始化函数
+	async function initialize() {
+		try {
+			// 设置监听器
+			setupMutationObserver();
+			setupEventListeners();
+
+			// 初始化主题状态
+			initializeThemeState();
+
+			// 加载并初始化 Mermaid
+			await loadMermaid();
+			await initializeMermaid();
+		} catch (error) {
+			console.error("Failed to initialize Mermaid system:", error);
+		}
+	}
+
+	// 启动初始化
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initialize);
+	} else {
+		initialize();
+	}
+})();
+</script></div><p>图看不懂？让我们说中文：</p><blockquote class="admonition bdm-note"><span class="bdm-title"><div>TEE 在解密 data 时干的活</div></span><p>1.密钥永不暴露：</p><p>KDK 在 TEE 内部生并永久存储，操作系统无法读取。锁屏密码只作为输入，在 TEE 内通过 KDF（如 script 或 SHA-256）派生临时密钥</p><p>2.解密流程：
+用户输入密码 -> 密码哈希值传入 TEE -> TEE 用 KDK 验证哈希 -> 验证成功则释放解密 User Key 所需的密钥 -> User Key 解密 DEK -> DEK 解密文件</p><p>3.总结：
+FBE 的加密密钥不是锁屏密码，厂商也不允许导出 KDK</p></blockquote></section><section><h3 id="tee-硬件熔断">TEE 硬件熔断<a class="anchor" href="#tee-硬件熔断"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><blockquote class="admonition bdm-warning"><span class="bdm-title">WARNING</span><p>如果你去问 AI “关于硬件熔断各大手机厂商的做法”，你很有可能得不到正确的答案。
+例如，<del>解锁 bl = 熔断硬件保险丝（如高通 frp 分区），即使重锁也无法恢复 green 状态（e-fuse 物理熔断不可逆）</del> 这句话中包含两个严重的错误！</p><p>TEE 熔断的具体机制远比想象中和 AIGC 回答的复杂得多！</p></blockquote><p>具体请见 [[硬件熔断]]</p></section><section><h3 id="keymaster-ta">Keymaster TA<a class="anchor" href="#keymaster-ta"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>TA（Trusted Application，可信应用）运行在 TEE 内部，不在 Android/Linux 世界。</p><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="FullText" class="wrap" style="--ecMaxLine:54ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#24292e;--1:#e1e4e8">SoC</span></div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8"> </span></span><span style="--0:#24292e;--1:#e1e4e8">└─ Secure World (TEE)</span></div></div><div class="ec-line" style="--ecIndent:5ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">     </span></span><span style="--0:#24292e;--1:#e1e4e8">├─ TEE OS (QSEE / OP-TEE / Trustonic)</span></div></div><div class="ec-line" style="--ecIndent:5ch"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">     </span></span><span style="--0:#24292e;--1:#e1e4e8">│</span></div></div><div class="ec-line" style="--ecIndent:5ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">     </span></span><span style="--0:#24292e;--1:#e1e4e8">├─ Keymaster TA        ← 现在正在谈的</span></div></div><div class="ec-line" style="--ecIndent:5ch"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">     </span></span><span style="--0:#24292e;--1:#e1e4e8">├─ Gatekeeper TA       ← 生物识别</span></div></div><div class="ec-line" style="--ecIndent:5ch"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">     </span></span><span style="--0:#24292e;--1:#e1e4e8">├─ Widevine TA         ← DRM L1（显存给大，上下文放长，一会儿会考）</span></div></div><div class="ec-line" style="--ecIndent:5ch"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">     </span></span><span style="--0:#24292e;--1:#e1e4e8">├─ OEM Security TA     ← 厂商自定义（熔断逻辑常在这里）</span></div></div><div class="ec-line" style="--ecIndent:5ch"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">     </span></span><span style="--0:#24292e;--1:#e1e4e8">└─ Other Trusted Apps</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><p><strong>TA 是他吗“硬件级验证”的执行者。</strong></p><p>以下这些都是Ta干的活：</p><ul>
+<li>生成 RSA/ECC Attestation Key</li>
+<li>保存密钥（TEE 内或 StrongBox）</li>
+<li>校验启动状态（verifiedBootState）</li>
+<li>决定是否允许 Hardware-backed Attestation</li>
+<li>对 SafetyNet/Play Integrity 请求进行签名</li>
+</ul><p>TA 读取 verifiedBootState，一旦 <code>orange/red</code>，TA 降级 key 权限，禁用 Attestation Key，返回 <code>non-hardware-backed</code> 等一系列硬件不可信信息。</p><section><h4 id="strongbox">StrongBox<a class="anchor" href="#strongbox"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>StrongBox 是 Keymaster 的一个实现后端。</p><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="RichText" class="wrap" style="--ecMaxLine:33ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#24292e;--1:#e1e4e8">Keymaster API</span></div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8"> </span></span><span style="--0:#24292e;--1:#e1e4e8">├─ TEE-backed Keymaster</span></div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8"> </span></span><span style="--0:#24292e;--1:#e1e4e8">└─ StrongBox-backed Keymaster</span></div></div><div class="ec-line" style="--ecIndent:7ch"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">       </span></span><span style="--0:#24292e;--1:#e1e4e8">└─ 独立安全芯片 / Secure Element</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section></section><section><h3 id="drm-和-widevine">DRM 和 Widevine<a class="anchor" href="#drm-和-widevine"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>Widevine / DRM 与 Keymaster TA 并列，同属 TEE 内的 Trusted Application</p><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="RichText" class="wrap" style="--ecMaxLine:43ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#24292e;--1:#e1e4e8">TEE / Secure World</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">  </span></span><span style="--0:#24292e;--1:#e1e4e8">├─ Keymaster TA        ← 身份 / Attestation</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">  </span></span><span style="--0:#24292e;--1:#e1e4e8">├─ Widevine TA         ← DRM / 内容解密</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">  </span></span><span style="--0:#24292e;--1:#e1e4e8">├─ Gatekeeper TA       ← 生物识别</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent"><span style="--0:#24292e;--1:#e1e4e8">  </span></span><span style="--0:#24292e;--1:#e1e4e8">└─ OEM Security TA     ← 熔断 / 状态机</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><blockquote class="admonition bdm-note"><span class="bdm-title"><div>QUESTION</div></span><p>猜猜 DRM 去哪里了？</p></blockquote><section><h4 id="drmdigital-rights-management">DRM（Digital Rights Management）<a class="anchor" href="#drmdigital-rights-management"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>只做三件事：</p><ol>
+<li>密钥不泄漏</li>
+<li>内容不被随意拷贝</li>
+<li>播放环境可控</li>
+</ol><p><strong>回答的是“我愿不愿意把内容解密给你？”，而不是“你这个设备值不值得被信任 [[#^0923e9]]”</strong></p><p>如果你无法理解以上 从“回答问题”角度的解释，那么我再从“安全边界”角度解释一次。
+安全边界有两条：</p><ul>
+<li>身份边界（Attestation）
+AVB → TEE → ==Keymaster → SafetyNet / Integrity==
+用于支付，银行，反作弊。</li>
+<li>内容边界（DRM）
+AVB → TEE → ==Widevine TA → Secure Video Path==
+用于一坨流媒体软件的 hIdH dEfiNiTiOn 支援。
+注意到 DRM 不依赖 Keymaster，也就是说 StrongBox 不是 DRM 的必须组件。</li>
+</ul></section><section><h4 id="widevine">Widevine<a class="anchor" href="#widevine"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>是 Google 的 DRM 方案，被 Netflix / YouTube / Amazon / Disney+ 等采用。
+它是一套密钥管理 + 加解密 + 授权协议，一套与 TEE 深度绑定的安全架构。</p><p><strong>Widevine 的三个等级</strong>：</p><ul>
+<li>L1
+密钥和解密都在 TEE 内。它依赖 TEE 状态、OEM 标志和 DRM 私钥 ^a844e0</li>
+<li>L2
+密钥在 TEE 内，解密在 Android 世界，理论存在但很少见</li>
+<li>L3
+密钥和解密都在 Android 世界，完全不信任硬件，不依赖 TEE</li>
+</ul><p>一旦 Widevine L1 掉了（Widevine TA 被永久降级）就回不来了，不是“丢了”而是“被吊销”。
+因为 L1 所依赖的 [[#^a844e0]] 这些不在 AVB，不可刷回，不可恢复出厂。</p></section></section><section><h3 id="钥匙盒子-keybox">钥匙盒子 Keybox<a class="anchor" href="#钥匙盒子-keybox"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>Keybox 是一份设备出厂时注入的、与硬件绑定的 DRM 身份凭据。
+它包含（概念层面）：</p><ul>
+<li>设备 DRM 私钥材料</li>
+<li>OEM / Google 签名</li>
+<li>设备型号、厂商信息</li>
+<li>绑定 SoC / TEE 的信息
+它不在 system/vendor，不在 vbmeta，普通刷机永远接触不到。</li>
+</ul><p>谷歌吊销 Revoke 机制：</p><ul>
+<li>触发条件：
+<ul>
+<li>设备密钥泄漏：如维修点非法提取 Keybox 并公开售卖</li>
+<li>安全漏洞利用：攻击者通过漏洞批量提取 Keybox（如旧版高通漏洞）</li>
+<li>谷歌检测异常：同一 Keybox 在多设备激活</li>
+</ul>
+</li>
+<li>吊销后果：
+<ul>
+<li>Widevine 等级降至 L3，视频 APP 限制分辨率</li>
+<li>谷歌通过 CRL（证书吊销列表）远程推送，设备联网后自动生效</li>
+</ul>
+</li>
+</ul><section><h4 id="tricky-store-的概念级解释">Tricky Store 的概念级解释<a class="anchor" href="#tricky-store-的概念级解释"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>它不是恢复 L1 的工具，而是试图影响 Android 世界中的 DRM Info 和 APP 对 DRM 能力的初步判断，属于“上层个信息伪装 / 接口层干预”类模块。</p><ul>
+<li>Zygisk：在进程注入层隐藏 Magisk 痕迹</li>
+<li>系统属性欺骗：伪造 <code>ro.build.tags=release-keys</code> 等安全属性</li>
+<li>API 钩子：拦截 <code>SafetyNet</code>、<code>Play Integrity</code> 的检测窗口，返回合法响应</li>
+</ul></section><section><h4 id="我是低调的黑客">我是低调的黑客<a class="anchor" href="#我是低调的黑客"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>你所能接触到的 keybox.xml 文件，只是某些模块 / 工具使用的“伪身份材料”。</p><p>让我们随机挑选一个 2024 年 11 月在 tg 流传并高价售卖的 keybox.xml 文件</p><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="xml" class="wrap" style="--ecMaxLine:62ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#24292E;--1:#E1E4E8">&#x3C;</span><span style="--0:#1E7734;--1:#85E89D">AndroidAttestation</span><span style="--0:#24292E;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">&#x3C;</span><span style="--0:#1E7734;--1:#85E89D">NumberOfKeyboxes</span><span style="--0:#24292E;--1:#E1E4E8">>1&#x3C;/</span><span style="--0:#1E7734;--1:#85E89D">NumberOfKeyboxes</span><span style="--0:#24292E;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">&#x3C;</span><span style="--0:#1E7734;--1:#85E89D">Keybox</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">DeviceID</span><span style="--0:#24292E;--1:#E1E4E8">=</span><span style="--0:#032F62;--1:#9ECBFF">"Telegram @BDovo_Channel"</span><span style="--0:#24292E;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">    </span></span><span style="--0:#24292E;--1:#E1E4E8">&#x3C;</span><span style="--0:#1E7734;--1:#85E89D">Key</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">algorithm</span><span style="--0:#24292E;--1:#E1E4E8">=</span><span style="--0:#032F62;--1:#9ECBFF">"ecdsa"</span><span style="--0:#24292E;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">      </span></span><span style="--0:#24292E;--1:#E1E4E8">&#x3C;</span><span style="--0:#1E7734;--1:#85E89D">PrivateKey</span><span style="--0:#24292E;--1:#E1E4E8">>-----BEGIN EC PRIVATE KEY-----&#x3C;/</span><span style="--0:#1E7734;--1:#85E89D">PrivateKey</span><span style="--0:#24292E;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">      </span></span><span style="--0:#24292E;--1:#E1E4E8">&#x3C;</span><span style="--0:#1E7734;--1:#85E89D">CertificateChain</span><span style="--0:#24292E;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">        </span></span><span style="--0:#24292E;--1:#E1E4E8">&#x3C;</span><span style="--0:#1E7734;--1:#85E89D">Certificate</span><span style="--0:#24292E;--1:#E1E4E8">>-----BEGIN CERTIFICATE-----&#x3C;/</span><span style="--0:#1E7734;--1:#85E89D">Certificate</span><span style="--0:#24292E;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">        </span></span><span style="--0:#24292E;--1:#E1E4E8">...</span></div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">      </span></span><span style="--0:#24292E;--1:#E1E4E8">&#x3C;/</span><span style="--0:#1E7734;--1:#85E89D">CertificateChain</span><span style="--0:#24292E;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">    </span></span><span style="--0:#24292E;--1:#E1E4E8">&#x3C;/</span><span style="--0:#1E7734;--1:#85E89D">Key</span><span style="--0:#24292E;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">&#x3C;/</span><span style="--0:#1E7734;--1:#85E89D">Keybox</span><span style="--0:#24292E;--1:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span style="--0:#24292E;--1:#E1E4E8">&#x3C;/</span><span style="--0:#1E7734;--1:#85E89D">AndroidAttestation</span><span style="--0:#24292E;--1:#E1E4E8">></span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><p>一眼盯真鉴定为死刑</p><blockquote>
+<p>出现了明文的 EC PRIVATE KEY</p>
+</blockquote><p>这是他吗人类、root、内核、fastboot 理论上都拿不到的东西（暂时不谈记忆里怎么有人提取的）</p><p>这份文件刻意模仿了 Keybox 的外形，包括</p><ul>
+<li>ECDSA Key</li>
+<li>CertificateChain</li>
+<li>Android Attestation 结构</li>
+<li>看起来像是设备身份
+所以这份文件是给 Android 世界看的。Tricky Store 使用伪造 Attestaion / Keybox 描述 伪装上层，影响了 Android API 返回和大部分 APP 的判断</li>
+</ul><p>那 Google 吊销的 KeyBox 到底是什么就可以精确定义了：被吊销的是 Google DRM Server 不再信任某个“真实、TEE 内生成的 KeyBox 身份”，而不是这种 XML，这种模块都能替换的东西。</p><hr></section></section></section>
+<section><h2 id="safetynet-和-play-integrity-api">SafetyNet 和 Play Integrity API<a class="anchor" href="#safetynet-和-play-integrity-api"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="核心概念-1">核心概念<a class="anchor" href="#核心概念-1"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>远程设备完整性与可信状态证明服务，<strong>不验证启动，只验证 TA 是否能给出硬件签名</strong>（已逐步被 Play Integrity API 取代）
+Google 在 SafetyNet 中首次把 TEE/StrongBox 的 Attestation 能力强制暴露给 APP</p><p>他不是本地安全机制，而是：</p><ul>
+<li>设备向 Google 服务请求“证明”</li>
+<li>Google 返回一个签名的 Attestation 结果</li>
+<li>APP 验证结果，决定是否允许允许</li>
+</ul></section><section><h3 id="safetynet-的两种验证模式">SafetyNet 的两种验证模式<a class="anchor" href="#safetynet-的两种验证模式"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Basic Attestation</th><th>软件级</th><th>无 TEE 密钥，基于系统属性 已知特征</th></tr></thead><tbody><tr><td>Hardware Attestation</td><td>硬件级</td><td>基于 TEE/StrongBox 的密钥</td></tr></tbody></table></section><section><h3 id="widevine-与-safetynet--integrity-的关系">Widevine 与 SafetyNet / Integrity 的关系<a class="anchor" href="#widevine-与-safetynet--integrity-的关系"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>SafetyNet / Integrity</th><th>Widevine</th></tr></thead><tbody><tr><td>是否远程 是否使用 TEE 是否共享熔断状态</td><td>是</td><td>是</td></tr><tr><td>结果表现</td><td>BASIC / STRONG</td><td>L1 / L3</td></tr><tr><td>它们是并行的。</td><td></td><td></td></tr></tbody></table></section><section><h3 id="google-play-integrity-api">Google Play Integrity API<a class="anchor" href="#google-play-integrity-api"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>来都来了，再看看占上风的 Play Integrity API 吧</p><p>这是给开发者 / 服务器用的 设备与应用完整性证明接口，是 SafetyNet 的继任者。
+（请区别于 Play Protect/Play 保护机制，那是给用户用的本地恶意软件防护与应用扫描机制）</p><p>它的作用是让 APP 判断：这个请求是不是来自一个“未被篡改、未被滥用、可信的 Android 设备与 APP 实例”
+它检查的维度包括设备完整性、应用完整性和账号 / 环境。</p><p>为什么 Google 要换掉 SafetyNet？</p><ul>
+<li>返回字段太多、太透明</li>
+<li>易被针对性绕过（Magisk 时代）</li>
+<li>客户端可验证（被 Hook）</li>
+<li>OEM 策略暴露过多</li>
+</ul><p>改进方向：</p><ul>
+<li>强制服务端校验</li>
+<li>策略黑盒化</li>
+<li>与 Play 服务账号、分发强绑定</li>
+<li>降低“字段级伪造”空间</li>
+</ul></section></section>  </div> <script type="module">document.addEventListener("click",function(i){const c=i.target;if(c&&c.classList.contains("copy-btn")){const l=c.closest("pre")?.querySelector("code");let s="";if(l){const t=l.querySelectorAll("span.line");if(t.length>0){const o=[];for(let e=0;e<t.length;e++){const r=t[e].textContent||"";o.push(r)}s=o.join(`
 `)}else{const o=l.querySelectorAll(".code:not(summary *)");if(o.length>0){const e=[];for(let n=0;n<o.length;n++){const a=o[n].textContent||"";e.push(a)}s=e.join(`
 `)}else s=l.textContent||""}}s=s.replace(/\n\n\n+/g,function(t){const e=t.length-1;let n;return e%2===0?n=e/2:n=Math.floor((e+1)/2),n<1&&(n=1),`
-`.repeat(n+1)}),(async t=>{try{await navigator.clipboard.writeText(t)}catch(o){console.warn("Clipboard API 失败，尝试备用方案:",o);const e=document.createElement("textarea");e.value=t,e.style.position="fixed",e.style.left="-999999px",e.style.top="-999999px",document.body.appendChild(e),e.focus(),e.select(),document.body.removeChild(e)}})(s).then(()=>{const t=c.getAttribute("data-timeout-id");t&&clearTimeout(parseInt(t)),c.classList.add("success");const o=setTimeout(()=>{c.classList.remove("success")},1e3);c.setAttribute("data-timeout-id",o.toString())}).catch(t=>{console.error("复制失败:",t)})}});</script> <div class="relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 mb-6 rounded-xl license-container onload-animation"> <div class="transition font-bold text-black/75 dark:text-white/75"> Wplace：一场人间闹剧 </div> <a href="https://blog.y11han.icu/posts/wplace/" class="link text-[var(--primary)]"> https://blog.y11han.icu/posts/wplace/ </a> <div class="flex gap-6 mt-2"> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">作者</div> <div class="transition text-black/75 dark:text-white/75 line-clamp-2">Y11Han</div> </div> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">发布于</div> <div class="transition text-black/75 dark:text-white/75 line-clamp-2">2025-09-06</div> </div> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">许可协议</div> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="link text-[var(--primary)] line-clamp-2">CC BY-NC-SA 4.0</a> </div> </div> <svg width="0.97em" height="1em" class="transition text-[15rem] absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5" data-icon="fa6-brands:creative-commons">   <symbol id="ai:fa6-brands:creative-commons" viewBox="0 0 496 512"><path fill="currentColor" d="m245.83 214.87l-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93c-22.13 0-33.22 14.61-33.22 43.84c0 23.57 9.21 43.84 33.22 43.84c14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98c-22.6 0-73.96-10.32-73.96-77.05c0-58.69 43-77.06 72.63-77.06c30.72-.01 52.7 11.95 65.99 35.86m143.05 0l-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93c-22.14 0-33.22 14.61-33.22 43.84c0 23.55 9.23 43.84 33.22 43.84c14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98c-22.69 0-73.96-9.87-73.96-77.05c0-58.67 42.97-77.06 72.63-77.06c30.71-.01 52.58 11.95 65.56 35.86M247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248c129.93 0 248.44-100.87 248.44-248c0-137.87-106.62-248-248.44-248m.87 450.81c-112.54 0-203.7-93.04-203.7-202.81c0-105.42 85.43-203.27 203.72-203.27c112.53 0 202.82 89.46 202.82 203.26c-.01 121.69-99.68 202.82-202.84 202.82"/></symbol><use href="#ai:fa6-brands:creative-commons"></use>  </svg> </div> </div> </div>  <div class="card-base p-6 mb-4"><div id="tcomment"></div> <script src="/scroll-protection.js"></script> <script src="/assets/js/twikoo.all.min.js"></script> <script>(function(){const config = {"envId":"https://y11han.netlify.app/.netlify/functions/twikoo","lang":"zh-CN","el":"#tcomment","path":"/posts/wplace"};
+`.repeat(n+1)}),(async t=>{try{await navigator.clipboard.writeText(t)}catch(o){console.warn("Clipboard API 失败，尝试备用方案:",o);const e=document.createElement("textarea");e.value=t,e.style.position="fixed",e.style.left="-999999px",e.style.top="-999999px",document.body.appendChild(e),e.focus(),e.select(),document.body.removeChild(e)}})(s).then(()=>{const t=c.getAttribute("data-timeout-id");t&&clearTimeout(parseInt(t)),c.classList.add("success");const o=setTimeout(()=>{c.classList.remove("success")},1e3);c.setAttribute("data-timeout-id",o.toString())}).catch(t=>{console.error("复制失败:",t)})}});</script> <div class="relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 mb-6 rounded-xl license-container onload-animation"> <div class="transition font-bold text-black/75 dark:text-white/75"> 我对安卓设备启动信任链的理解 </div> <a href="https://blog.y11han.icu/posts/android-device-boot-trust-chain/" class="link text-[var(--primary)]"> https://blog.y11han.icu/posts/android-device-boot-trust-chain/ </a> <div class="flex gap-6 mt-2"> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">作者</div> <div class="transition text-black/75 dark:text-white/75 line-clamp-2">Y11Han</div> </div> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">发布于</div> <div class="transition text-black/75 dark:text-white/75 line-clamp-2">2025-12-25</div> </div> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">许可协议</div> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="link text-[var(--primary)] line-clamp-2">CC BY-NC-SA 4.0</a> </div> </div> <svg width="0.97em" height="1em" class="transition text-[15rem] absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5" data-icon="fa6-brands:creative-commons">   <symbol id="ai:fa6-brands:creative-commons" viewBox="0 0 496 512"><path fill="currentColor" d="m245.83 214.87l-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93c-22.13 0-33.22 14.61-33.22 43.84c0 23.57 9.21 43.84 33.22 43.84c14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98c-22.6 0-73.96-10.32-73.96-77.05c0-58.69 43-77.06 72.63-77.06c30.72-.01 52.7 11.95 65.99 35.86m143.05 0l-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93c-22.14 0-33.22 14.61-33.22 43.84c0 23.55 9.23 43.84 33.22 43.84c14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98c-22.69 0-73.96-9.87-73.96-77.05c0-58.67 42.97-77.06 72.63-77.06c30.71-.01 52.58 11.95 65.56 35.86M247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248c129.93 0 248.44-100.87 248.44-248c0-137.87-106.62-248-248.44-248m.87 450.81c-112.54 0-203.7-93.04-203.7-202.81c0-105.42 85.43-203.27 203.72-203.27c112.53 0 202.82 89.46 202.82 203.26c-.01 121.69-99.68 202.82-202.84 202.82"/></symbol><use href="#ai:fa6-brands:creative-commons"></use>  </svg> </div> </div> </div>  <div class="card-base p-6 mb-4"><div id="tcomment"></div> <script src="/scroll-protection.js"></script> <script src="/assets/js/twikoo.all.min.js"></script> <script>(function(){const config = {"envId":"https://y11han.netlify.app/.netlify/functions/twikoo","lang":"zh-CN","el":"#tcomment","path":"/posts/android-device-boot-trust-chain"};
 
   // 获取当前页面路径
   function getCurrentPath() {
@@ -1235,7 +2867,7 @@ const umamiConfig = {"enabled":true,"apiKey":"api_yIobsQH9V9WEpZJkguIpFTwJa03zdZ
       initTwikoo();
     }
   });
-})();</script></div>  <div id="last-modified" data-last-modified="2025-09-06T00:00:00" data-prefix="距离上次编辑: " data-year="年" data-month="月" data-day="天" data-hour="小时" data-minute="分" data-second="秒" style="display: none;"></div> <div class="card-base p-6 mb-4"> <script>
+})();</script></div>  <div id="last-modified" data-last-modified="2025-12-25T00:00:00" data-prefix="距离上次编辑: " data-year="年" data-month="月" data-day="天" data-hour="小时" data-minute="分" data-second="秒" style="display: none;"></div> <div class="card-base p-6 mb-4"> <script>
                     function runtime() {
                         const lastModifiedElement = document.getElementById('last-modified');
                         const startDate = new Date(lastModifiedElement.dataset.lastModified);
@@ -1286,7 +2918,7 @@ const umamiConfig = {"enabled":true,"apiKey":"api_yIobsQH9V9WEpZJkguIpFTwJa03zdZ
                         document.getElementById("modifiedtime").innerHTML = runtimeString;
                     }
                     setInterval(runtime, 1000);
-                </script> <div class="flex items-center gap-3"> <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-[var(--enter-btn-bg)]"> <svg width="1em" height="1em" class="text-3xl text-[var(--primary)]" data-icon="material-symbols:history-rounded">   <symbol id="ai:material-symbols:history-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21q-3.15 0-5.575-1.912T3.275 14.2q-.1-.375.15-.687t.675-.363q.4-.05.725.15t.45.6q.6 2.25 2.475 3.675T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H8q.425 0 .713.288T9 9t-.288.713T8 10H4q-.425 0-.712-.288T3 9V5q0-.425.288-.712T4 4t.713.288T5 5v1.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21m1-9.4l2.5 2.5q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-2.8-2.8q-.15-.15-.225-.337T11 11.975V8q0-.425.288-.712T12 7t.713.288T13 8z"/></symbol><use href="#ai:material-symbols:history-rounded"></use>  </svg> </div> <div class="flex flex-col gap-1"> <div id="modifiedtime" class="text-[1.0rem] leading-tight text-black/75 dark:text-white/75"></div> <p class="text-[0.8rem] leading-tight text-black/75 dark:text-white/75"> 部分信息可能已经过时 </p> </div> </div> </div> <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full"> <a href="/posts/r1cm-flash/" class="w-full font-bold overflow-hidden active:scale-95"> <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4"> <svg width="1em" height="1em" class="text-[2rem] text-[var(--primary)]" data-icon="material-symbols:chevron-left-rounded">   <symbol id="ai:material-symbols:chevron-left-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z"/></symbol><use href="#ai:material-symbols:chevron-left-rounded"></use>  </svg> <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75"> R1CM-Flash </div> </div> </a> <a href="/posts/My-High-Shcool/" class="w-full font-bold overflow-hidden active:scale-95"> <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4"> <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75"> 我的高中生活：从濒临崩溃到肉身成圣，从都市废柴到小镇做题家 </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[2rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </div> </a> </div>  <div class="footer col-span-2 onload-animation hidden lg:block" data-astro-cid-haiuh7kc> <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">--><div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div> <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">--> <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"> <div class="transition text-50 text-sm text-center"> <div class="mb-2">114514</div>
+                </script> <div class="flex items-center gap-3"> <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-[var(--enter-btn-bg)]"> <svg width="1em" height="1em" class="text-3xl text-[var(--primary)]" data-icon="material-symbols:history-rounded">   <symbol id="ai:material-symbols:history-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21q-3.15 0-5.575-1.912T3.275 14.2q-.1-.375.15-.687t.675-.363q.4-.05.725.15t.45.6q.6 2.25 2.475 3.675T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H8q.425 0 .713.288T9 9t-.288.713T8 10H4q-.425 0-.712-.288T3 9V5q0-.425.288-.712T4 4t.713.288T5 5v1.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21m1-9.4l2.5 2.5q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-2.8-2.8q-.15-.15-.225-.337T11 11.975V8q0-.425.288-.712T12 7t.713.288T13 8z"/></symbol><use href="#ai:material-symbols:history-rounded"></use>  </svg> </div> <div class="flex flex-col gap-1"> <div id="modifiedtime" class="text-[1.0rem] leading-tight text-black/75 dark:text-white/75"></div> <p class="text-[0.8rem] leading-tight text-black/75 dark:text-white/75"> 部分信息可能已经过时 </p> </div> </div> </div> <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full"> <a href="#" class="w-full font-bold overflow-hidden active:scale-95 pointer-events-none">  </a> <a href="/posts/r1cm-flash/" class="w-full font-bold overflow-hidden active:scale-95"> <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4"> <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75"> R1CM-Flash </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[2rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </div> </a> </div>  <div class="footer col-span-2 onload-animation hidden lg:block" data-astro-cid-haiuh7kc> <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">--><div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div> <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">--> <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"> <div class="transition text-50 text-sm text-center"> <div class="mb-2">114514</div>
 &copy; <span id="copyright-year">2025</span> Y11Han. All Rights Reserved. /
 <a class="transition link text-[var(--primary)] font-medium" href="/rss/" onclick="event.preventDefault(); navigateToPage('/rss/')">RSS</a> /
 <a class="transition link text-[var(--primary)] font-medium" href="/atom/" onclick="event.preventDefault(); navigateToPage('/atom/')">Atom</a> /
