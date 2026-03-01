@@ -1,4 +1,439 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>y11han&apos;s icu</title><description>One gay man&apos;s website</description><link>https://blog.y11han.icu/</link><language>zh_CN</language><item><title>硬件熔断</title><link>https://blog.y11han.icu/posts/hardware-fuse/</link><guid isPermaLink="true">https://blog.y11han.icu/posts/hardware-fuse/</guid><description>《我对安卓设备启动信任链的理解》的个人学习补充文章，仅供本人学习使用！</description><pubDate>Fri, 26 Dec 2025 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>y11han&apos;s icu</title><description>One gay man&apos;s website</description><link>https://blog.y11han.icu/</link><language>zh_CN</language><item><title>WriteUp</title><link>https://blog.y11han.icu/posts/writeup/</link><guid isPermaLink="true">https://blog.y11han.icu/posts/writeup/</guid><description>WriteUp</description><pubDate>Sun, 01 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Level 1&lt;/h2&gt;
+&lt;h3&gt;Task 1&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在GNU/linux或服务器上使用&lt;code&gt;docker-compose&lt;/code&gt;在本地搭建Gitea&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;验证标准&lt;/strong&gt;: 在宿主机能够通过 &lt;code&gt;ssh -p &amp;lt;port&amp;gt; git@localhost -T&lt;/code&gt; 验证连接，或成功执行 &lt;code&gt;git clone ssh://git@localhost:&amp;lt;port&amp;gt;/...&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://blog.y11han.icu/_astro/20251228114916.B6wMtegi_VWTP0.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://blog.y11han.icu/_astro/20260129232544.QIkS1St__Z1nJDQl.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;Task 2&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;完成 &lt;a href=&quot;https://github.com/f3rmata/woc2026-hello-from-skm&quot;&gt;SAST Rust 内核模块&lt;/a&gt; 的编译和运行&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[加分项] CI/CD&lt;/strong&gt;: 配置 GitHub Actions（或 GitLab CI），实现代码 Push 后自动构建 Docker 镜像并推送至镜像仓库 (Docker Hub / GHCR)&lt;/p&gt;
+&lt;h4&gt;- [x]任务 1：找到并修复 tetris 模块中的 panic&lt;/h4&gt;
+&lt;h4&gt;- [x]任务 2：加载 magic.ko，用 ioctl 触发 flag  &amp;lt;=&amp;gt; Task 4&lt;/h4&gt;
+&lt;h4&gt;- [x]任务 3：给这个仓库加上 CI/CD + 产出 OCI 镜像&lt;/h4&gt;
+&lt;h4&gt;- [x]任务 4：给 tetris 模块加一个 debugfs 调试入口&lt;/h4&gt;
+&lt;h4&gt;你可以继续改进的地方（加分项）&lt;/h4&gt;
+&lt;p&gt;这些不要求必须做，但很值得做：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[ ] 把 ioctl 命令号做成共享头文件/绑定，避免用户态和内核态各写各的魔数。&lt;/li&gt;
+&lt;li&gt;[x] 给 &lt;code&gt;scripts/run.sh&lt;/code&gt; 加一个“无 KVM 的降级开关”。&lt;/li&gt;
+&lt;li&gt;[x] 做一个 &lt;code&gt;make test&lt;/code&gt;：本地一键跑 QEMU smoke test。 ===本地没做，CI 做了 ===&lt;/li&gt;
+&lt;li&gt;[ ] 给仓库加上基本的格式化/静态检查入口（&lt;code&gt;rustfmt&lt;/code&gt;/&lt;code&gt;clippy&lt;/code&gt;/&lt;code&gt;clang-format&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以下按完成顺序&lt;/p&gt;
+&lt;p&gt;:::note[自动检测 KVM]&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://blog.y11han.icu/_astro/20260123112651.DzpVIqgX_RJcC5.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;qemu64 纯软件模拟，如果没有 KVM 就不能用-cpu host&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://blog.y11han.icu/_astro/20260123112912.hp4jMxfU_Z13iDXC.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h4&gt;busybox 官方仓库限制历史对象访问，已切换至 GitHub 镜像以保证可复现性&lt;/h4&gt;
+&lt;h2&gt;&lt;img src=&quot;https://blog.y11han.icu/_astro/20260123133613.BA0kgIOG_1Qi6J3.webp&quot; alt=&quot;&quot; /&gt;
+:::&lt;/h2&gt;
+&lt;p&gt;:::note[panic fix]
+&lt;img src=&quot;https://blog.y11han.icu/_astro/20260123184743.DGjvW-VQ_1Dn42Q.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ make build
+...   
+\*\*\* Rust bindings generator &apos;bindgen&apos; versions 0.66.0 and 0.66.1 may not  
+\*\*\* work due to a bug (https://github.com/rust-lang/rust-bindgen/pull/2567),  
+\*\*\* unless patched (like Debian&apos;s).  
+\*\*\*   Your version:     0.66.1  
+\*\*\* Please see Documentation/rust/quick-start.rst for details  
+\*\*\* on how to set up the Rust support.  
+BINDGEN rust/bindings/bindings_generated.rs  
+BINDGEN rust/uapi/uapi_generated.rs  
+...   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt; $ make run
+...   
+panicked at &apos;called \`Result::unwrap() \` on an \` Err \` value: FromBytesWithNulError { kind: InteriorNul(4) }&apos;, /usr/share/cargo/registry/bindgen-0.66.1/codegen/mod.rs:717:71  
+make[3]: \*\*\* [rust/Makefile:464: rust/uapi/uapi_generated.rs] Error 101  
+make[3]: \*\*\* Deleting file &apos;rust/uapi/uapi_generated.rs&apos;  
+make[3]: \*\*\* Waiting for unfinished jobs....  
+panicked at &apos;called \`Result::unwrap() \` on an \` Err \` value: FromBytesWithNulError { kind: InteriorNul(4) }&apos;, /usr/share/cargo/registry/bindgen-0.66.1/codegen/mod.rs:717:71  
+make[3]: \*\*\* [rust/Makefile:458: rust/bindings/bindings_generated.rs] Error 101  
+make[3]: \*\*\* Deleting file &apos;rust/bindings/bindings_generated.rs&apos;  
+make[2]: \*\*\* [/home/y11han/woc2026-hello-from-skm/linux/Makefile:1320: prepare] Error 2  
+make[1]: \*\*\* [Makefile:248: \_\_sub-make] Error 2  
+make[1]: Leaving directory &apos;/home/y11han/woc2026-hello-from-skm/linux&apos;  
+make: \*\*\* [Makefile:31: linux/arch/x86_64/boot/bzImage] Error 1  
+...   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;内核强制调用了 bindgen，无法通过绕开在本地跑 bindgen，那么就指定 bindgen 版本为 0.65.1&lt;br /&gt;
+&lt;code&gt;$ cargo install bindgen-cli --version 0.65.1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;拷贝虚空文件是何意味&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ls src/*.ko
+src/woc2026_hello_from_skm.ko  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;https://blog.y11han.icu/_astro/20260125213001.BprJFMow_Z2vKI23.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;发现华点，不存在的 magic.ko，先注释掉了
+:::&lt;/h2&gt;
+&lt;p&gt;:::note[加载magic.ko，用ioctl触发flag]&lt;/p&gt;
+&lt;h2&gt;上一步发现虚空拷贝 magic.ko 文件，&lt;code&gt;$ git status --ignored&lt;/code&gt; 中有 deleted: src/magic.ko，说明 Task 2（magic ioctl）在当前仓库中已被移除。
+magic 模块已被移除（或合并），  当前仓库中 flag 触发路径已迁移至现有模块（tetris 或其 ioctl）
+&lt;img src=&quot;https://blog.y11han.icu/_astro/20260126101302.CTdLNVjf_Z1pin5h.webp&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://blog.y11han.icu/_astro/20260126104418.ClVLyTNY_Z29lEYK.webp&quot; alt=&quot;&quot; /&gt;
+&lt;s&gt;s3 说有问题先跳过，别急后面又call back&lt;/s&gt;
+:::&lt;/h2&gt;
+&lt;p&gt;:::note[加上CI/CD + 产出OCI镜像]
+&lt;img src=&quot;https://blog.y11han.icu/_astro/20260129175339.DL2SvFVK_Z2ra3r1.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; docker pull ghcr.io/tamako0401/woc2026-hello-from-skm:latest
+ docker run -it --rm ghcr.io/tamako0401/woc2026-hello-from-skm:latest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;https://blog.y11han.icu/_astro/20260224173551.MtMRGAbq_Z2jEOd9.webp&quot; alt=&quot;&quot; /&gt;
+oh it works&lt;/p&gt;
+&lt;p&gt;:::quote&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;pre&gt;&lt;code&gt;# .github/workflows/ci.yml
+name: woc2026 CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout repository with submodules
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          clang-15 \
+          lld \
+          llvm-15 \
+          libelf-dev \
+          libssl-dev \
+          bc \
+          flex \
+          bison \
+          qemu-system-x86 \
+          cpio
+
+    - name: Install Rust toolchain
+      run: |
+        curl https://sh.rustup.rs -sSf | sh -s -- -y
+        source $HOME/.cargo/env
+        rustup toolchain install 1.88.0        # The Cargo Bool says: Edidion 2024 has been stabilized in the 1.85 release.
+        rustup default 1.88.0                  # reference: https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#edition-2024
+        cargo install bindgen-cli --version 0.65.1
+
+    - name: Build project
+      run: |
+        source $HOME/.cargo/env
+
+        export PATH=/usr/lib/llvm-15/bin:$PATH
+        export LLVM=1
+        export LLVM_IAS=1
+        export LLVM_VERSION=15
+        clang --version
+
+        make setup
+        make build
+
+    - name: Smoke test (boot kernel)
+      run: |
+        source $HOME/.cargo/env
+        chmod +x scripts/run.sh
+
+        timeout 30s ./scripts/run.sh -k linux -b busybox | tee qemu.log || true
+        grep -q &quot;Welcome to&quot; qemu.log
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: woc2026-build
+        path: |
+          linux/arch/x86_64/boot/bzImage
+          busybox/rootfs.img
+          src/*.ko
+          tools/*.a
+
+    - name: Log in to GitHub Container Registry
+      if: github.event_name != &apos;pull_request&apos;
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Lowercase Repository Name
+      id: lowercase_repo
+      run: |
+        echo &quot;REPO_LOWER=${GITHUB_REPOSITORY,,}&quot; &amp;gt;&amp;gt; $GITHUB_ENV
+
+    - name: Build and push Docker image
+      if: github.event_name != &apos;pull_request&apos;
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: Dockerfile
+        push: true
+        tags: ghcr.io/${{ env.REPO_LOWER }}:latest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# Dockerfile
+
+FROM alpine:latest
+
+RUN apk add --no-cache qemu-system-x86_64 bash
+
+WORKDIR /app
+
+RUN mkdir -p linux/arch/x86_64/boot/
+RUN mkdir -p busybox/
+
+# 左边是CI构建产物路径,右边是容器内路径
+COPY linux/arch/x86_64/boot/bzImage  linux/arch/x86_64/boot/bzImage
+COPY busybox/rootfs.img              busybox/rootfs.img
+COPY scripts/run.sh                  run.sh
+
+RUN chmod +x run.sh
+
+# 启动命令不带任何参数，使用默认的 ./linux 和 ./busybox
+CMD [&quot;./run.sh&quot;]
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# Makefile
+
+# SPDX-License-Identifier: GPL-2.0
+
+KDIR ?= ./linux
+BDIR ?= ./busybox
+TDIR ?= ./tools
+SUBMODULE_DEPTH ?= 1
+TARGET ?=
+NCPU ?= $(shell nproc)
+
+BZIMAGE := $(KDIR)/arch/x86_64/boot/bzImage
+ROOTFS := $(BDIR)/rootfs.img
+BUSYBOX_CONFIG := $(BDIR)/.config
+BUSYBOX_BIN := $(BDIR)/busybox
+BUSYBOX_INSTALL := $(BDIR)/_install
+
+USERSPACE_PROG := play_tetris
+
+ROOTFS_STAMP := .rootfs_stamp
+
+.PHONY: all run build setup clean rebuild kernel busybox rootfs module module-clean module-install tools tools-clean tools-install repack-rootfs
+
+all: run
+
+build: kernel busybox $(ROOTFS) module-install tools-install repack-rootfs
+
+rebuild: clean-build build
+
+kernel: $(BZIMAGE)
+
+$(BZIMAGE):
+    @echo &quot;Applying custom kernel configuration...&quot;
+    @cp qemu-busybox-min.config $(KDIR)/.config
+    @echo &quot;Building linux kernel...&quot;
+    @cd $(KDIR) &amp;amp;&amp;amp; yes &quot;&quot; | make LLVM=1 CLIPPY=1 oldconfig
+    @cd $(KDIR) &amp;amp;&amp;amp; make LLVM=1 CLIPPY=1 $(TARGET) -j$(NCPU) || [ $$? -eq 141 ]
+
+.PHONY: busybox-config
+
+busybox-config:
+    @echo &quot;Configuring busybox...&quot;
+    @if [ ! -f $(BDIR)/.config ]; then \
+        make -C $(BDIR) defconfig; \
+        sed -i &apos;s/# CONFIG_STATIC is not set/CONFIG_STATIC=y/&apos; $(BDIR)/.config; \
+        yes &quot;&quot; | make -C $(BDIR) oldconfig; \
+    fi
+
+busybox: busybox-config $(BUSYBOX_BIN)
+
+$(BUSYBOX_BIN):
+    @echo &quot;Building busybox...&quot;
+    @cd $(BDIR) &amp;amp;&amp;amp; make -j$(NCPU)
+    @file $(BUSYBOX_BIN) | grep -q &quot;statically linked&quot; || (echo &quot;Error: BusyBox is not statically linked!&quot; &amp;amp;&amp;amp; exit 1)
+
+rootfs: $(ROOTFS)
+
+$(ROOTFS): $(BUSYBOX_BIN) | $(BUSYBOX_INSTALL)
+    @echo &quot;Installing busybox...&quot;
+    @cd $(BDIR) &amp;amp;&amp;amp; make install
+    @echo &quot;Configuring rootfs...&quot;
+    @scripts/config-rootfs.sh -b $(BDIR)
+    @$(MAKE) repack-rootfs
+
+$(BUSYBOX_INSTALL):
+    @mkdir -p $(BUSYBOX_INSTALL)
+
+MODULE_NAME := woc2026_hello_from_skm
+MODULE_SRC := src
+MODULE_KO := $(MODULE_SRC)/$(MODULE_NAME).ko
+
+module: kernel
+    @echo &quot;Preparing Rust environment...&quot;
+    @$(MAKE) -C $(KDIR) LLVM=1 CLIPPY=1 prepare
+    @echo &quot;Building Rust kernel module...&quot;
+    $(MAKE) -C $(KDIR) M=$(PWD)/$(MODULE_SRC) LLVM=1 modules
+
+module-clean:
+    @echo &quot;Cleaning Rust module...&quot;
+    $(MAKE) -C $(KDIR) M=$(PWD)/$(MODULE_SRC) clean
+
+module-install: module
+    @echo &quot;Installing module to rootfs...&quot;
+    @mkdir -p $(BUSYBOX_INSTALL)/lib/modules
+    @cp $(MODULE_KO) $(BUSYBOX_INSTALL)/lib/modules/
+#    @cp $(MODULE_SRC)/magic.ko $(BUSYBOX_INSTALL)/lib/modules/
+    @touch $(ROOTFS_STAMP)
+
+tools: $(TDIR)/$(USERSPACE_PROG).c
+    @echo &quot;Building userspace program...&quot;
+    @gcc -static -o $(TDIR)/$(USERSPACE_PROG).a $(TDIR)/$(USERSPACE_PROG).c -Wall -Wextra
+
+tools-clean:
+    @echo &quot;Cleaning userspace program...&quot;
+    @rm -f $(TDIR)/$(USERSPACE_PROG).a
+
+tools-install: tools
+    @echo &quot;Installing userspace tools...&quot;
+    @cp $(TDIR)/$(USERSPACE_PROG).a $(BUSYBOX_INSTALL)/bin/$(USERSPACE_PROG)
+    @cp $(TDIR)/$(USERSPACE_PROG).a $(BUSYBOX_INSTALL)/usr/bin/$(USERSPACE_PROG)
+    @touch $(ROOTFS_STAMP)
+
+repack-rootfs: $(BUSYBOX_INSTALL)
+    @echo &quot;Packing rootfs image...&quot;; \
+    ln -sf sbin/init $(BUSYBOX_INSTALL)/init; \
+    cd $(BUSYBOX_INSTALL) &amp;amp;&amp;amp; find . | cpio -o -H newc | gzip &amp;gt; ../rootfs.img; \
+    touch $(ROOTFS_STAMP);
+
+run: build
+    @echo &quot;Starting QEMU...&quot;
+    scripts/run.sh -b $(BDIR) -k $(KDIR)
+
+setup:
+    - SUBMODULE_DEPTH=$(SUBMODULE_DEPTH) scripts/setup.sh
+
+clean-build:
+    @echo &quot;Cleaning build artifacts...&quot;
+    @rm -f $(BZIMAGE) $(ROOTFS) $(ROOTFS_STAMP)
+    @rm -rf $(BUSYBOX_INSTALL)
+
+clean: clean-build module-clean tools-clean
+    @echo &quot;Cleaning kernel...&quot;
+    @$(MAKE) -C $(KDIR) clean 2&amp;gt;/dev/null || true
+    @echo &quot;Cleaning busybox...&quot;
+    @$(MAKE) -C $(BDIR) clean 2&amp;gt;/dev/null || true
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;:::&lt;/h2&gt;
+&lt;p&gt;:::note[给 tetris 模块加一个 debugfs 调试入口]
+debugfs 目录：/sys/kernel/debug/tetris/&lt;br /&gt;
+只读文件：state&lt;br /&gt;
+内容包含：score / game_over / next_piece / current_piece / board(20x10 #/ .)&lt;/p&gt;
+&lt;p&gt;实现要点：&lt;br /&gt;
+debugfs 的 state 读取走的是 kernel::debugfs::Writer（seq_file 单次输出），只读稳定；&lt;br /&gt;
+/dev/tetris 和 debugfs 观察的是同一份 TetrisDeviceInner（通过在注册 miscdevice 时把 Arc&amp;lt;TetrisDeviceInner 存到 this_device 的 drvdata，然后 open 时取回 clone），所以 debugfs 读到的状态是真实的实时状态；&lt;br /&gt;
+模块生命周期里持有 _debugfs: TetrisDebugFs，RAII 方式卸载时会自动删 debugfs 文件/目录。&lt;/p&gt;
+&lt;p&gt;运行时：&lt;br /&gt;
+1.挂载 debugfs：&lt;br /&gt;
+&lt;code&gt;mount -t debugfs none /sys/kernel/debug&lt;/code&gt;&lt;br /&gt;
+2.插入模块后读状态：&lt;br /&gt;
+&lt;code&gt;cat /sys/kernel/debug/tetris/state&lt;/code&gt;&lt;br /&gt;
+3.同时用 /dev/tetris 操作，再读 debugfs：&lt;br /&gt;
+&lt;code&gt;echo a  /dev/tetris（左移）&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;echo w  /dev/tetris（旋转）&lt;/code&gt;&lt;br /&gt;
+然后再 &lt;code&gt;cat /sys/kernel/debug/tetris/state&lt;/code&gt;&lt;br /&gt;
+:::&lt;/p&gt;
+&lt;h2&gt;Level 2&lt;/h2&gt;
+&lt;h3&gt;Task 3&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;s3&lt;/code&gt;在臭臭的地方找到了一个香香的PostgreSQL&lt;/p&gt;
+&lt;p&gt;据说里面藏了宝藏？但是好像跑不起来&lt;/p&gt;
+&lt;p&gt;name:sast&lt;/p&gt;
+&lt;p&gt;password:123456&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;导入 Vmware Workstation
+&lt;img src=&quot;https://blog.y11han.icu/_astro/20260128110919.nPFzvZwr_Z1ozwv0.webp&quot; alt=&quot;&quot; /&gt;说明 PostgreSQL 进程根本没起来。但不要想着 systemctl start postgresql 肯定没那么简单&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://blog.y11han.icu/_astro/20260128110959.CrG0VuIW_Z1DpI4a.webp&quot; alt=&quot;&quot; /&gt;
+发现 postgresql 数据库目录属于用户 1145
+&lt;img src=&quot;https://blog.y11han.icu/_astro/20260128111157.CpLekLHC_11dF8F.webp&quot; alt=&quot;&quot; /&gt; 确认这个数据库曾经活过，base 目录下每一个数字子目录都是一个数据库&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://blog.y11han.icu/_astro/20260128111114.BZNsTr9O_1IuiaI.webp&quot; alt=&quot;&quot; /&gt;
+16388 目录相对较大，藏 flag 的概率较高&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://blog.y11han.icu/_astro/20260128111547.Cr5Ok-ba_2iYMBh.webp&quot; alt=&quot;&quot; /&gt;
+初见端倪&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;sast@zwz :var/lib/postgresql/15$&lt;/em&gt;  &lt;code&gt;sudo cat /var/lib/postgresql/15/main/base/16388/16389 | less&lt;/code&gt;
+&lt;img src=&quot;https://blog.y11han.icu/_astro/20260128111736.G5cv2NGy_Z1nNcoK.webp&quot; alt=&quot;&quot; /&gt;
+只有前半截，怎么会是呢？怀疑 &lt;code&gt;cat&lt;/code&gt; 和 &lt;code&gt;grep&lt;/code&gt; 被 \0 截断了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://blog.y11han.icu/_astro/20260128112158.Bs_ex6Am_249wCl.webp&quot; alt=&quot;&quot; /&gt;
+CCB查查表环节，十六进制不会骗人，确定字段被 TOAST&lt;/p&gt;
+&lt;p&gt;开始梳理表之间的关系&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;16388                # database OID
+  |
+  +--16389            # 主表 / 索引
+  |
+  +--pg_toast_???   # flag 后半截肯定还在16388目录下
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;:::caution[走弯路，个人认为触发 TOSAST 会在同一时间修改多个文件]
+&lt;img src=&quot;https://blog.y11han.icu/_astro/20260128113149.1fPg8nE8_Z8OHim.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;但实际上_vm 是可见性映射，_fsm 是空闲空间映射，这里不可能藏 flag。&lt;br /&gt;
+转变思路，只在文件名为纯数字的文件里找 /续标识 /拜谢&lt;/p&gt;
+&lt;p&gt;后半截可能在&amp;gt;= 16389 的 relation
+&lt;img src=&quot;https://blog.y11han.icu/_astro/20260128123056.BQQCX1fa_1Oz1Ki.webp&quot; alt=&quot;&quot; /&gt;
+:::&lt;/p&gt;
+&lt;p&gt;:::tip[done]
+flag{W0w_#w3lc0me_2_SAST!}
+:::&lt;/p&gt;
+&lt;h3&gt;Task 4&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;0001&lt;/code&gt;在Task 2的内核放置了一个&lt;code&gt;dev1ce&lt;/code&gt;作为小礼物&lt;/p&gt;
+&lt;p&gt;并留下了一个暗号 : &lt;code&gt;0x1337&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;你能在dmesg里找到她留下的秘密吗?&lt;/p&gt;
+&lt;p&gt;请使用 &lt;code&gt;insmod /lib/modules/magic.ko&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;意外地发现：哎呀这不就是我们 Task2 的子任务 2 嘛&lt;br /&gt;
+&lt;s&gt;纯黑盒又不是不能做&lt;/s&gt;，自己把 magic.ko cp 到 busybox/_install/lib/modules/ 再重新打包&lt;/p&gt;
+&lt;p&gt;宿主机中 搓最小用户态，再 cp 进 rootfs
+&lt;img src=&quot;https://blog.y11han.icu/_astro/20260129223805.8-dzfiLQ_ZGzhw3.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;QEMU 中
+&lt;img src=&quot;https://blog.y11han.icu/_astro/20260129223841.CD5f5IQn_Z1JjfjA.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;:::tip[done]
+flag{You_get_the_magic_of_kernel!!}
+:::&lt;/p&gt;
+&lt;h2&gt;Level 3 (Advanced)&lt;/h2&gt;
+&lt;h3&gt;Task 5&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;s3&lt;/code&gt; 精神状态堪忧，梦游时总想执行 &lt;code&gt;sudo rm -rf /workshop/PPProject/*&lt;/code&gt;。作为运维组的正义使者，你需要利用 eBPF 技术，在内核层拦截该操作&lt;/p&gt;
+&lt;p&gt;推荐使用:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Rust Aya&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Go cilium/ebpf&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;附加题的附加题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;那如果s3把文件夹先mv走再去删除呢？&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如何通过 eBPF 监控并阻止针对该目录的 rename 操作&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;也许代码层面实现会比较困难，可以在验收的时候聊聊&lt;/p&gt;
+&lt;h3&gt;Task 6&lt;/h3&gt;
+&lt;p&gt;此题是Task 2的附加题&lt;/p&gt;
+&lt;p&gt;在&lt;a href=&quot;https://github.com/f3rmata/woc2026-hello-from-skm&quot;&gt;GitHub - f3rmata/woc2026-hello-from-skm&lt;/a&gt; 中使用DebugFS添加一个数据统计功能,并为仓库提交pr来进行验收&lt;/p&gt;
+</content:encoded></item><item><title>硬件熔断</title><link>https://blog.y11han.icu/posts/hardware-fuse/</link><guid isPermaLink="true">https://blog.y11han.icu/posts/hardware-fuse/</guid><description>《我对安卓设备启动信任链的理解》的个人学习补充文章，仅供本人学习使用！</description><pubDate>Fri, 26 Dec 2025 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;[!WARNING]
 本文内容在&lt;a href=&quot;https://www.coolapk.com/feed/51677285?s=YTE2ODJiOTEzOTdhNWVnNjk0YTg0OGZ6a1503&amp;amp;shareUid=3766878&amp;amp;shareFrom=com.coolapk.market_15.0.3&quot;&gt;酷安用户mlgmxyysd的动态&lt;/a&gt;的基础上加入自己的解释，仅供本人学习使用&lt;br /&gt;
 TEE熔断的具体机制远比想象中和AIGC回答的复杂得多！&lt;/p&gt;
