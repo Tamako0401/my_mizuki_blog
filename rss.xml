@@ -1,4 +1,365 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>y11han&apos;s icu</title><description>One gay man&apos;s website</description><link>https://blog.y11han.icu/</link><language>zh_CN</language><item><title>WriteUp</title><link>https://blog.y11han.icu/posts/writeup/</link><guid isPermaLink="true">https://blog.y11han.icu/posts/writeup/</guid><description>WriteUp</description><pubDate>Sun, 01 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Level 1&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>y11han&apos;s icu</title><description>One gay man&apos;s website</description><link>https://blog.y11han.icu/</link><language>zh_CN</language><item><title>kukui改造计划 —— 彻头彻尾失败的折腾</title><link>https://blog.y11han.icu/posts/chromebook/</link><guid isPermaLink="true">https://blog.y11han.icu/posts/chromebook/</guid><description>kukui-rev</description><pubDate>Sat, 04 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;kukui改造计划 —— 彻头彻尾失败的折腾&lt;/h1&gt;
+&lt;h1&gt;Chromebook Duet（kukui / MT8183）&lt;/h1&gt;
+&lt;h2&gt;-1.前记&lt;/h2&gt;
+&lt;p&gt;我于 2026 年 3 月 12 日购入了一台 Lenovo IdeaPad Chromebook Duet 10.9（初代），赞叹于其无与伦比的&lt;s&gt;虚拟机数量&lt;/s&gt; 折腾潜力，诟病与其糟糕的性能。到手后惊奇地发现，卖家已经帮我关闭了操作系统验证（并且在启动界面上有“进入 Legacy Bios 和从 USB 启动的选项”），因此我早已开始痴心妄想 EFI 引导的开放性优势能为 kukui 小小的机身带来什么潜力。2026 年 4 月，受够了内置虚拟机的垃圾性能和 flatpak 少得可怜的支持 arm 的二进制包，我决定彻底抹掉 ChromeOS。&lt;/p&gt;
+&lt;h2&gt;0.目标&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;ul&gt;
+&lt;li&gt;机器：Chromebook Duet&lt;/li&gt;
+&lt;li&gt;SoC：MT8183&lt;/li&gt;
+&lt;li&gt;代号：kukui&lt;/li&gt;
+&lt;li&gt;目标：把 Linux 装到 eMMC，基本抹掉 ChromeOS&lt;/li&gt;
+&lt;li&gt;发行版目标：Arch Linux ARM&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;省流：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;先用 Cadmium 官方 Debian release 建立可启动的 Chromebook 内核/引导链&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;再把 eMMC 上的 &lt;code&gt;IntRoot&lt;/code&gt; 根分区替换成 Arch Linux ARM 的 rootfs&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;短期继续使用 Cadmium 的内核&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Arch 只接管用户态，不接管内核分区&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Episode I - 借用 velvet-os 的 KERN 分区，牛头人 ArchLinuxARM&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;h3&gt;1.如梦初醒&lt;/h3&gt;
+&lt;p&gt;&quot;完蛋了，这并不是 EFI。&quot; &lt;a href=&quot;https://docs.linuxkernel.org.cn/arch/arm/google/chromebook-boot-flow.html?utm_source=chatgpt.com&quot;&gt;Chromebook 的启动链是&lt;/a&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Coreboot（Google 定制）&lt;/li&gt;
+&lt;li&gt;depthcharge（验证启动）&lt;/li&gt;
+&lt;li&gt;设备专用 kernel / DTB&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们没有办法把它刷成通用 UEFI 启动。&lt;/p&gt;
+&lt;p&gt;通过搜索找到 &lt;a href=&quot;https://zyyme.com/arm-chromebook-cgpt.html&quot;&gt;Arm的Chromebook手动切换AB分区 cgpt使用教程 Ubuntu双系统共存 改温度墙&lt;/a&gt;，她的办法是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用 &lt;code&gt;cgpt&lt;/code&gt; 切换 ChromeOS 的 A/B 启动分区&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;不破坏 ChromeOS 前 12 个分区&lt;/strong&gt; 的前提下，缩小 &lt;code&gt;ROOT-B&lt;/code&gt; 或调整 stateful 分区，给 Ubuntu 额外腾分区做双系统&lt;/li&gt;
+&lt;li&gt;仍然依赖 Chromebook 的原生启动方式和特定分区布局来启动另一个系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;腾出空间太小，而且双系统不是我想要的，我要抹掉 ChromeOS。&lt;/p&gt;
+&lt;p&gt;那我能不能找到一个现成的 KERN + rootfs 呢？&lt;/p&gt;
+&lt;h3&gt;2.初见端倪&lt;/h3&gt;
+&lt;p&gt;https://github.com/velvet-os/imagebuilder/blob/main/systems/chromebook_kukui/readme.md&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Running Debian on arm64 chromebooks, consoles, tv boxes and other stuff.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我操，好几把炫酷。我操，它支援我的 kukui！遂把镜像烧录到 u 盘中，顺利进入 velvet-os。&lt;/p&gt;
+&lt;p&gt;那我岂不是可以在这根 USB 上保留 velvet 的 &lt;code&gt;KERN&lt;/code&gt;，把 rootfs 替换成 Arch Linux ARM？&lt;/p&gt;
+&lt;h3&gt;3.梦游 velvet-os&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;cat /proc/cmdline&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;root=LABEL=rootpart
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当时我是这么认为的，我可以新建一块分区用来存放 Archlinuxarm 的 rootfs，并把 LABEL 改为 rootpart 就可以无痛切换到 Arch 了！&lt;/p&gt;
+&lt;p&gt;创建新分区，配一下 DNS，wget -O - http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz | sudo tar -xzpf - -C /mnt/arch，chroot 进去做最小初始化，改 LABEL，重启！&lt;/p&gt;
+&lt;p&gt;arch 的 tty 的键盘驱动/按键映射出了很大问题......键盘难以触发，成功键入后不显示文本（就像在输密码），内置键盘和外接键盘如出一辙。&lt;/p&gt;
+&lt;p&gt;我明白了。我当时复用的那套 velvet/stb 内核（6.12.50-stb-cbm），不是 Arch 自己更通用的 Chromebook 内核，那很像键盘驱动 + keymap 双重问题。&lt;/p&gt;
+&lt;p&gt;那不用这垃圾内核了吧，&lt;code&gt;pacman -S --disable-sandbox linux-aarch64-chromebook&lt;/code&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A new kernel version needs to be flashed onto /dev/sda5.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这意味着什么？&lt;code&gt;/dev/sda5&lt;/code&gt; 是我的 &lt;strong&gt;Arch 根分区&lt;/strong&gt;。这几把直接把 28MiB 的数据直接写到了我的分区开头。&lt;/p&gt;
+&lt;p&gt;为什么会这样？因为 &lt;code&gt;linux-aarch64-chromebook&lt;/code&gt; 这个包的安装脚本会把 Chromebook kernel blob 写到一个块设备上。&lt;br /&gt;
+而我当前 chroot 里 &lt;code&gt;/boot&lt;/code&gt; 没有被正确指向“合适的启动目标”，它最终把目标识别成了 &lt;code&gt;/dev/sda5&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;我操。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/velvet-os/imagebuilder/issues/150&quot;&gt;chromebook_kukui: misc: Arch Linux on Kukui with mainline Arch Linux Kernel · Issue #150 · velvet-os/imagebuilder · GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我在 ArchLinuxARM 中找到了一个支持 kukui 设备的主线内核，它是 linux-aarch64-chromebook 内核。&lt;/p&gt;
+&lt;p&gt;我下载了一个 ArchLinuxARM RootFS。然后我在 U 盘上创建了两个分区：一个用于内核，一个用于根目录，并格式化为 ext4。之后，我将 RootFS 复制到了根分区。接着，我 chroot 到 Chromebook 目录，并使用命令“sudo pacman -S linux-aarch64-chromebook”安装了内核。然后，我通过下载你仓库中 kukui 的额外文件文件夹并复制，修复了蓝牙错误信息和声音问题。之后，我创建了 /etc/modprobe.d/blacklist.conf 文件，并添加内容“install bluetooth /bin/false”，再次修复了蓝牙错误信息。然后，我使用命令“sudo mkinitcpio -P”更新了 initramfs。之后，我创建了两个分区，并生成了一个 fstab 文件。最后，我从 Arch U 盘启动，使用 nmtui 连接到互联网，并使用命令“sudo pacman -S gnome”安装了 gnome。我也用 EndeavourOS 做过类似的操作，但需要一些额外的步骤。我目前使用的是 EndeavourOS。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我操不早说。&lt;/p&gt;
+&lt;p&gt;这条路最终还是搁置了，感兴趣的可以试试（？或许这才是最正确的答案&lt;/p&gt;
+&lt;h3&gt;4. so, stb-cbm kernel, FUCK YOU!&lt;/h3&gt;
+&lt;p&gt;&lt;s&gt;所有 AI，帮我&lt;/s&gt;在 velvet 里生成一个新的、适合 kukui/krane 的 Chromebook KERN 分区镜像，再把它刷到 USB 的 KERN 分区。
+sudo env NO_FLASH=1 CUSTOM_ROOT_PARAMETER=&apos;root=LABEL=archnew rootwait rw&apos; vtbuild &quot;$(uname -r)&quot;
+sudo env NO_FLASH=1 CUSTOM_ROOT_PARAMETER=&apos;root=LABEL=archnew rootwait rw&apos; CUSTOM_SUFFIX=&apos;-archnew&apos; vtbuild &quot;$(uname -r)&quot;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo dd if=/boot/vmlinux.kpart-initrd-6.12.50-stb-cbm+-archnew of=/dev/sda2 bs=4M status=progress conv=fsync
+sync
+
+sudo cgpt add -i 2 -P 10 -S 1 -T 2 /dev/sda
+sudo cgpt add -i 1 -P 1 -S 0 -T 0 /dev/sda
+sudo cgpt show /dev/sda
+
+sync
+sudo reboot
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;你猜怎么着，键盘问题依旧。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Episode II - 用 Cadmium 引导，把 eMMC 上的 rootfs 换成 Arch Linux ARM&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;p&gt;在 Reddit 上漫游。 https://www.reddit.com/r/chrultrabook/comments/ty92qf/linux_on_a_lenovo_duet/?solution=7f728d5bdfab12537f728d5bdfab1253&amp;amp;js_challenge=1&amp;amp;token=bbbe4bf1c9a2b5160829c4be34da5861e4918694119f2cf6d2aa11f99c1bbf2f&amp;amp;tl=zh-hans&lt;/p&gt;
+&lt;p&gt;https://www.reddit.com/r/chromeos/comments/v6fkx4/linux_development_on_a_lenovo_ideapad_duet_5/?solution=69d976265debc17969d976265debc179&amp;amp;js_challenge=1&amp;amp;token=bbbe4bf1c9a2b5160829c4be34da5861635abc5c1724a773203048b5a72a4882&amp;amp;tl=zh-hans&lt;/p&gt;
+&lt;p&gt;注意到，&lt;a href=&quot;https://github.com/Maccraft123/Cadmium#readme&quot;&gt;Cadmium&lt;/a&gt; 这个项目被反复提及。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A Linux &lt;s&gt;distro&lt;/s&gt; installer for some RISC laptops&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;WTF, thats what im looking for&lt;/p&gt;
+&lt;h3&gt;1. 第一条路：直接让 Cadmium 构建 Arch 镜像&lt;/h3&gt;
+&lt;p&gt;一开始走的是 Cadmium 的源码构建路线，修改 &lt;code&gt;config&lt;/code&gt; 之后直接 &lt;code&gt;build-all&lt;/code&gt;。&lt;/p&gt;
+&lt;h4&gt;1.1 改过的 &lt;code&gt;config&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;ROOTFS=arch
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;1.2 构建命令&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;./build-all cadmium-kukui-arch.img 8G
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;1.3 遇到的问题：Cadmium 的补丁逻辑有坑&lt;/h4&gt;
+&lt;p&gt;构建过程中出现的致命问题：它开始打一些不属于 kukui 的内核补丁，例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;x1e80100.uart14.patch&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x1e80100.slim7x-bt.patch&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这两个明显是给 Snapdragon X Elite / Yoga Slim 7x 用的，不是 MT8183 kukui。&lt;/p&gt;
+&lt;p&gt;报错形态：
+Applying .../x1e80100.uart14.patch
+can&apos;t find file to patch at input line 19
+File to patch:&lt;/p&gt;
+&lt;p&gt;检查 &lt;code&gt;kernel/build&lt;/code&gt; 发现根因：
+case $KTREE in
+mainline)
+PATCHSUFFIX=&quot;patch&quot;
+...&lt;/p&gt;
+&lt;p&gt;然后它会直接遍历：
+for x in $(ls $CADMIUMROOT/kernel/patches/*.$PATCHSUFFIX); do
+patch -p1 --forward &amp;lt; $x
+done&lt;/p&gt;
+&lt;p&gt;也就是说，在 &lt;code&gt;mainline&lt;/code&gt; 下它把 &lt;code&gt;kernel/patches/&lt;/code&gt; 里所有 &lt;code&gt;.patch&lt;/code&gt; 全部打了。&lt;/p&gt;
+&lt;h4&gt;1.4 即便手工挪走无关补丁，还是会继续炸&lt;/h4&gt;
+&lt;p&gt;把无关补丁先挪走：
+mv kernel/patches/x1e80100.uart14.patch ../cadmium-patches-disabled/
+mv kernel/patches/x1e80100.slim7x-bt.patch ../cadmium-patches-disabled/&lt;/p&gt;
+&lt;p&gt;再清缓存重跑：
+rm -rf tmp/linux-aarch64
+./build-all cadmium-kukui-arch.img 8G&lt;/p&gt;
+&lt;p&gt;但后面又陆续遇到这些问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;gru.0002-drm-rockchip-Only-wait-for-panel-ACK-on-PSR-entry.patch&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;kukui.unbreak-bluetooth.patch&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;都报类似：
+Reversed (or previously applied) patch detected!  Skipping patch.&lt;/p&gt;
+&lt;p&gt;这说明这些补丁对当前 mainline 内核已经过时，或相应改动已经上游化，但 Cadmium 脚本没有跳过已应用补丁的逻辑。&lt;/p&gt;
+&lt;p&gt;得出结论：源码构建 Arch 镜像这条线，不稳定、不可复现、产物不可靠。&lt;/p&gt;
+&lt;h4&gt;1.5 放弃直接 build Arch&lt;/h4&gt;
+&lt;hr /&gt;
+&lt;h3&gt;2. 第二条路：改走官方 Debian release&lt;/h3&gt;
+&lt;p&gt;源码构建不靠谱，改用 Cadmium 官方 release 的 Debian 镜像作为基线。这步的意义是拿到一套已在 kukui 上验证可启动的 Cadmium 内核 + Chromebook 引导链。&lt;/p&gt;
+&lt;h4&gt;2.1 实机测试&lt;/h4&gt;
+&lt;p&gt;官方 Debian release 的 USB 镜像能在这台 Duet 上正常启动。这步给后面的折腾提供了可启动基线。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h4&gt;2.2 把 Debian 安到 eMMC&lt;/h4&gt;
+&lt;p&gt;在官方 release 上跑 &lt;code&gt;./install&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ntpdate&lt;/code&gt; 在 sid 里已经没了
+Error: Package &apos;ntpdate&apos; has no installation candidate&lt;/p&gt;
+&lt;p&gt;这步之后，Debian 基础系统安装基本完成。&lt;/p&gt;
+&lt;h4&gt;2.3. eMMC 分区布局确认&lt;/h4&gt;
+&lt;p&gt;安装后 eMMC 上形成这几个关键分区：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;IntKernelA&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IntKernelB&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IntRoot&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;USB 启动盘上是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ExtKernelA&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ExtKernelB&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ExtRoot&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这就是后来整个方案的基础：USB 上那套是已知可启动的 Cadmium，eMMC 上那套是目标系统。&lt;/p&gt;
+&lt;h4&gt;2.4. 开始把 rootfs 换成 Arch&lt;/h4&gt;
+&lt;p&gt;不再让 Cadmium 直接生成 Arch 镜像，而是手工把 eMMC 的 &lt;code&gt;IntRoot&lt;/code&gt; 替换成 Arch Linux ARM rootfs。&lt;/p&gt;
+&lt;h4&gt;2.5 不重新格式化，尽量保留分区&lt;/h4&gt;
+&lt;p&gt;尽量保留 &lt;code&gt;IntRoot&lt;/code&gt; 分区本身，只替换里面内容。内核命令行往往会引用 root 分区，保留分区可让 UUID/PARTUUID 保持一致，减少&quot;内核能起但找不到 root&quot;这类问题。&lt;/p&gt;
+&lt;h4&gt;2.6 把 &lt;code&gt;IntRoot&lt;/code&gt; 挂到 &lt;code&gt;/mnt&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;eMMC 的 root 分区是 &lt;code&gt;/dev/mmcblk0p3&lt;/code&gt;，&lt;code&gt;PARTLABEL&lt;/code&gt; 是 &lt;code&gt;IntRoot&lt;/code&gt;：
+mount /dev/disk/by-partlabel/IntRoot /mnt&lt;/p&gt;
+&lt;h4&gt;2.7 解压 Arch rootfs 前&lt;/h4&gt;
+&lt;p&gt;坑 1：&lt;code&gt;bsdtar&lt;/code&gt; 不存在
+bsdtar: command not found
+apt update
+apt install libarchive-tools&lt;/p&gt;
+&lt;p&gt;坑 2：&lt;code&gt;resolv.conf&lt;/code&gt; 是 symlink&lt;/p&gt;
+&lt;p&gt;往 &lt;code&gt;/mnt/etc/resolv.conf&lt;/code&gt; 写 DNS 时出现：
+cp: not writing through symlink /mnt/etc/resolv.conf
+rm -f /mnt/etc/resolv.conf
+printf &apos;nameserver 1.1.1.1\nnameserver 8.8.8.8\n&apos; &amp;gt; /mnt/etc/resolv.conf&lt;/p&gt;
+&lt;h4&gt;2.8 解包 Arch Linux ARM rootfs&lt;/h4&gt;
+&lt;p&gt;最后走 Arch Linux ARM 的 tarball 解包路线：
+cd /tmp
+wget &amp;lt;ArchLinuxARM 的 tarball&amp;gt;
+bsdtar -xpf &amp;lt;tarball&amp;gt; -C /mnt&lt;/p&gt;
+&lt;p&gt;然后补基础配置：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/mnt/etc/hostname&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/mnt/etc/fstab&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/mnt/etc/resolv.conf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;再 bind mount 进 chroot：
+mount --bind /dev /mnt/dev
+mount --bind /proc /mnt/proc
+mount --bind /sys /mnt/sys
+mount --bind /run /mnt/run
+chroot /mnt /bin/bash&lt;/p&gt;
+&lt;h4&gt;2.9. 在 chroot 里的 Arch 初始化&lt;/h4&gt;
+&lt;p&gt;换镜像源，初始化 keyring，升级系统......熟悉得不能再熟悉的步骤。&lt;/p&gt;
+&lt;h4&gt;2.10 不要让 Arch 刷自己的内核&lt;/h4&gt;
+&lt;p&gt;升级过程中，&lt;code&gt;linux-aarch64-chromebook&lt;/code&gt; 之类的包会问是否把新内核刷到设备上。当时还没搞清楚刷写逻辑，机器启动链已依赖 Cadmium，且吃过键盘故障的亏，所以先保住 Cadmium 可启动内核。&lt;/p&gt;
+&lt;h4&gt;2.11. 第一次从 eMMC 启动 Arch：掉回 Chrome 恢复界面&lt;/h4&gt;
+&lt;p&gt;重启后第一次从 eMMC 启动，没进 Linux，而是卡在类似：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;系统正在进行一个关键更新，请勿关闭系统&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这说明不是 Arch 卡住，而是 ChromeOS 固件没有成功从 eMMC 上的内核分区起机。rootfs 换 Arch 不是最大问题，真正问题出在 &lt;code&gt;IntKernelA/B&lt;/code&gt; 启动链。&lt;/p&gt;
+&lt;h4&gt;2.12. 排查 eMMC 启动失败&lt;/h4&gt;
+&lt;p&gt;用 &lt;code&gt;cgpt show /dev/mmcblk0&lt;/code&gt; 检查 eMMC 分区状态：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;IntKernelA&lt;/code&gt; 存在&lt;/li&gt;
+&lt;li&gt;类型是 &lt;code&gt;ChromeOS kernel&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;属性正常：priority=10, tries=2, successful=1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结论：不是 GPT 标志位损坏，而是 &lt;code&gt;IntKernelA&lt;/code&gt; 里的内核内容不对。&lt;/p&gt;
+&lt;h4&gt;2.13 修复启动：把 eMMC 的内核分区恢复成和 USB 一样的 Cadmium 内核&lt;/h4&gt;
+&lt;p&gt;核心思路：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;USB 上的 &lt;code&gt;ExtKernelA&lt;/code&gt; 是已知可启动的&lt;/li&gt;
+&lt;li&gt;eMMC 上的 &lt;code&gt;IntKernelA&lt;/code&gt; 是怀疑对象&lt;/li&gt;
+&lt;li&gt;只要让 eMMC 上也有那套 Cadmium 内核，就能继续用 Arch rootfs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;方法：把 eMMC 上的内部内核分区恢复成与 USB 那套一致的 Cadmium kernel。无论是用 &lt;code&gt;install-kernel&lt;/code&gt; 还是直接把 USB 的 &lt;code&gt;ExtKernelA&lt;/code&gt; 重刷回 &lt;code&gt;IntKernelA&lt;/code&gt;，本质都是这件事。&lt;/p&gt;
+&lt;p&gt;结果：终于从 eMMC 顺利进入了 Arch。&lt;/p&gt;
+&lt;h4&gt;2.14 内核和 &lt;code&gt;/lib/modules&lt;/code&gt; 严重不匹配&lt;/h4&gt;
+&lt;p&gt;进入 Arch 以后：系统能起，但键盘没反应&lt;/p&gt;
+&lt;p&gt;后来在 live 环境里一看，live 系统里：
+uname -r
+# 6.12.0-cadmium&lt;/p&gt;
+&lt;p&gt;而 eMMC 上的 Arch rootfs 里只有：
+/lib/modules/6.9.10-1-aarch64-ARCH&lt;/p&gt;
+&lt;p&gt;也就是说，当前真正运行的是 Cadmium 的 6.12.0-cadmium 内核，但 rootfs 里只有 Arch 自己的 6.9.10-1-aarch64-ARCH 模块。于是很多驱动模块都对不上。结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;USB 控制器能起来&lt;/li&gt;
+&lt;li&gt;设备能枚举&lt;/li&gt;
+&lt;li&gt;但 HID / 输入驱动没有正确加载&lt;/li&gt;
+&lt;li&gt;所以看起来像&quot;键盘失灵&quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;2.15 修复驱动：把 Cadmium 内核对应模块拷回 Arch rootfs&lt;/h4&gt;
+&lt;p&gt;关键。从 live 环境把与当前 Cadmium 内核对应的模块复制进 Arch：
+mkdir -p /mnt/lib/modules
+cp -a /lib/modules/6.12.0-cadmium /mnt/lib/modules/
+mkdir -p /mnt/lib/firmware
+cp -a /lib/firmware/. /mnt/lib/firmware/
+sync&lt;/p&gt;
+&lt;p&gt;然后进 chroot 跑：
+depmod -a 6.12.0-cadmium&lt;/p&gt;
+&lt;p&gt;重启之后，USB HID 设备在 &lt;code&gt;dmesg&lt;/code&gt; 里也能看到正常的 &lt;code&gt;input:&lt;/code&gt; 节点&lt;/p&gt;
+&lt;p&gt;这步之后，系统才真正可用。&lt;/p&gt;
+&lt;h4&gt;2.16 图形界面：先装 sway，再修花屏&lt;/h4&gt;
+&lt;p&gt;后面装了基础的 Wayland 环境：
+sudo pacman -S sway foot waybar wofi xorg-xwayland network-manager-applet&lt;/p&gt;
+&lt;p&gt;但直接运行 sway会出现闪屏、花屏、图形异常。这是一个不好的征兆。&lt;/p&gt;
+&lt;h4&gt;2.17 修花屏：强制软件渲染 + 禁用硬件光标&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;WLR_RENDERER=pixman WLR_NO_HARDWARE_CURSORS=1 sway
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;WLR_RENDERER=pixman&lt;/code&gt;：改用软件渲染&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;WLR_NO_HARDWARE_CURSORS=1&lt;/code&gt;：禁用硬件光标&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这样之后，sway 可以稳定进入。&lt;/p&gt;
+&lt;p&gt;Super + Enter，打开 &lt;code&gt;foot&lt;/code&gt; 终端，享受自己造的这坨屎吧。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Episode III 验证阶段！&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;h3&gt;网络：无 GUI 下靠 NetworkManager / nmcli&lt;/h3&gt;
+&lt;p&gt;在还没完全进入图形之前，联网主要靠 NetworkManager 和 &lt;code&gt;nmcli&lt;/code&gt;。
+sudo pacman -S networkmanager
+sudo systemctl enable --now NetworkManager&lt;/p&gt;
+&lt;p&gt;在无 GUI 下用 &lt;code&gt;nmcli&lt;/code&gt; 连 Wi-Fi 是完全可行的。&lt;/p&gt;
+&lt;h3&gt;蓝牙：正常&lt;/h3&gt;
+&lt;p&gt;蓝牙这条线基本是通的。&lt;/p&gt;
+&lt;p&gt;装包并启动服务：
+sudo pacman -S bluez bluez-utils
+sudo systemctl enable --now bluetooth&lt;/p&gt;
+&lt;p&gt;然后通过 &lt;code&gt;bluetoothctl&lt;/code&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;power on&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;agent on&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;default-agent&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;scan on&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;后续能正常看到控制器和设备，说明这块基本没问题。蓝牙可用。&lt;/p&gt;
+&lt;h3&gt;声音：仍未打通，但是驱动有，ALSA 有&lt;/h3&gt;
+&lt;h4&gt;一开始 PipeWire 只有 &lt;code&gt;Dummy Output&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;最早的状态是 &lt;code&gt;Built-in Audio [alsa]&lt;/code&gt; 能看到，但 PipeWire 只有 &lt;code&gt;Dummy Output&lt;/code&gt;。这说明不是整张声卡消失，而是用户态没给它正确的 profile / sink。&lt;/p&gt;
+&lt;h4&gt;ALSA 层其实有设备&lt;/h4&gt;
+&lt;p&gt;后来看：
+aplay -l
+arecord -l&lt;/p&gt;
+&lt;p&gt;都能看到这张卡：&lt;code&gt;mt8183_mt6358_ts3a227_max98357&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这说明内核声音驱动已经起来了，ALSA 设备也存在，问题更像是路由 / profile / mixer / UCM。&lt;/p&gt;
+&lt;h4&gt;&lt;code&gt;pactl list cards&lt;/code&gt; 发现 profile 居然是 &lt;code&gt;off&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;声卡卡片存在，但 &lt;code&gt;Active Profile: off&lt;/code&gt;。于是手动切到：
+pactl set-card-profile alsa_card.platform-mt8183-sound pro-audio&lt;/p&gt;
+&lt;p&gt;这样之后，PipeWire 里终于不再只是 &lt;code&gt;Dummy Output&lt;/code&gt;，而是出现了多个真实 sink / source。&lt;/p&gt;
+&lt;h4&gt;但最终还是没真正出声&lt;/h4&gt;
+&lt;p&gt;即便 profile 切到了 &lt;code&gt;pro-audio&lt;/code&gt;，也还是 sink 能看到，&lt;code&gt;pw-play&lt;/code&gt; 不报明显错误，但就是没有听见声音。&lt;/p&gt;
+&lt;p&gt;所以到目前为止，声音的结论是：驱动不是完全没起来，但音频路由/输出路径还没有彻底打通。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3&gt;总结&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;已经可用的部分&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从 eMMC 启动&lt;/li&gt;
+&lt;li&gt;Arch Linux ARM rootfs&lt;/li&gt;
+&lt;li&gt;Cadmium 6.12.0-cadmium 内核&lt;/li&gt;
+&lt;li&gt;内建键盘&lt;/li&gt;
+&lt;li&gt;外接键盘&lt;/li&gt;
+&lt;li&gt;USB HID&lt;/li&gt;
+&lt;li&gt;Wi-Fi&lt;/li&gt;
+&lt;li&gt;蓝牙&lt;/li&gt;
+&lt;li&gt;TTY 正常&lt;/li&gt;
+&lt;li&gt;sway 可进入&lt;/li&gt;
+&lt;li&gt;图形基本可用（在软件渲染模式下）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;还没彻底解决的部分&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;声音&lt;/li&gt;
+&lt;li&gt;可能还有：更优的图形加速、完全摆脱 Cadmium 内核、更完整的桌面体验&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li&gt;经验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;p&gt;经验 1：不要一上来就硬啃 Cadmium 的 Arch build&lt;/p&gt;
+&lt;p&gt;对 kukui 来说，当前更靠谱的路线不是&quot;Cadmium 直接 build 出 Arch 镜像&quot;，而是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先用官方 Debian release 建立可启动链&lt;/li&gt;
+&lt;li&gt;再手工替换 rootfs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;经验 2：Cadmium 当前 mainline 构建的 patch 逻辑太粗&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PATCHSUFFIX=&quot;patch&quot;&lt;/code&gt; 会导致所有 &lt;code&gt;.patch&lt;/code&gt; 全打，不属于本机的补丁也会被卷进去，过时补丁也会继续尝试打。这就是 &lt;code&gt;x1e80100.uart14.patch&lt;/code&gt;、&lt;code&gt;gru...patch&lt;/code&gt;、&lt;code&gt;kukui.unbreak-bluetooth.patch&lt;/code&gt; 一路炸的根本原因。&lt;/p&gt;
+&lt;p&gt;经验 3：混合&quot;Cadmium 内核 + Arch rootfs&quot;时，&lt;code&gt;/lib/modules&lt;/code&gt; 一定要匹配&lt;/p&gt;
+&lt;p&gt;这是最关键的一条。只换 rootfs，不换内核时，Arch 里的 &lt;code&gt;/lib/modules&lt;/code&gt; 默认不会和 Cadmium 内核对上。所以必须手工把 &lt;code&gt;/lib/modules/6.12.0-cadmium&lt;/code&gt; 复制到 Arch rootfs里。否则系统就会出现能启动，但输入设备像死了一样。&lt;/p&gt;
+&lt;p&gt;经验 4：短期内不要急着让 Arch 接管内核分区&lt;/p&gt;
+&lt;p&gt;在这台机器上，最稳的策略是 Cadmium 内核 + Arch 用户态，而不是马上去搞 &lt;code&gt;linux-aarch64&lt;/code&gt;、&lt;code&gt;linux-aarch64-chromebook&lt;/code&gt;、自己重封装 ChromeOS kernel partition。至少在机器已经稳定可用之前，不值得提前切这条线。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;最终形态：&lt;/strong&gt;
+Boot firmware: ChromeOS stock firmware
+Boot chain: Cadmium / depthcharge-compatible kernel partition
+Kernel: 6.12.0-cadmium
+Rootfs: Arch Linux ARM
+Storage: eMMC
+GUI: sway (pixman + no hardware cursors)
+Working: boot, keyboard, Wi-Fi, Bluetooth, TTY, basic GUI
+Broken / incomplete: audio&lt;/p&gt;
+</content:encoded></item><item><title>WriteUp</title><link>https://blog.y11han.icu/posts/writeup/</link><guid isPermaLink="true">https://blog.y11han.icu/posts/writeup/</guid><description>WriteUp</description><pubDate>Sun, 01 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Level 1&lt;/h2&gt;
 &lt;h3&gt;Task 1&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;在GNU/linux或服务器上使用&lt;code&gt;docker-compose&lt;/code&gt;在本地搭建Gitea&lt;/p&gt;
